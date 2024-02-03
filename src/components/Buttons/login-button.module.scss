@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+$PrimaryColor: rgba(244, 115, 86, 1);
+
+.login_btn {
+  width: 534px;
+  height: 70px;
+  border-radius: 20px;
+  background-color: $PrimaryColor;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: rgba(254, 254, 254, 1);
+  border: none;
+}
+
+.login_btn:hover {
+  color: rgb(234, 163, 147) !important;
+  color: rgba(254, 254, 254, 1) !important;
+  border: none;
+  box-shadow: none;
+  transform: scale(1.02);
+}
