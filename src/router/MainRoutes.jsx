@@ -1,18 +1,24 @@
 import { Routes, Route } from 'react-router-dom'
 import Main from '@screens/main/Main'
-import CheckCode from '@screens/check_code/CheckCode'
+import CheckCode from '@screens/auth/check-code/CheckCode'
+import Login from '@screens/auth/login/Login'
 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
     {
       link: '/',
-      element: <Main />,
+      element: <Login />,
       id: 1,
+    },
+    {
+      link: '/main',
+      element: <Main />,
+      id: 2,
     },
     {
       link: '/code',
       element: <CheckCode />,
-      id: 2,
+      id: 3,
     },
   ]
 
