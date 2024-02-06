@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { LoginButton } from '@components/Buttons/LoginButton'
 import { neocafeLogo, loginImg } from '@assets'
 import styles from '../auth.module.scss'
-import { checkCode } from '../../../store/slices/authSlice'
+import { checkCode } from '@store/slices/authSlice'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
