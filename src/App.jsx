@@ -9,6 +9,7 @@ import Main from './screens/main/Main'
 
 import './App.css'
 import Sider from './components/Sider/Sider'
+import Orders from './screens/Orders'
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
       {/* <MainRoutes />
       <ToastContainer /> */}
       {/* <LayoutComponent /> */}
-      <Sider />
+      <div style={{'display':'flex'}}>
+        <Sider />
+        <Orders />
+      </div>
     </>
   )
 }
