@@ -3,10 +3,20 @@ import { bell } from '../../assets/'
 import styles from './orders.module.scss'
 const Orders = () => {
   const [activeButton, setActiveButton] = useState('На вынос')
-
+  const [activeStatus, setActiveStatus] = useState('Новые')
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType)
   }
+  const handleStatusButtonClick = (buttonName) => {
+    setActiveStatus(buttonName)
+  }
+  const statusData = [
+    { statusName: 'Новые', color: 'rgb(133, 202, 255)' },
+    { statusName: 'В процессе', color: 'rgb(253, 248, 118)' },
+    { statusName: 'Готово', color: 'rgb(81, 219, 103)' },
+    { statusName: 'Отменено', color: 'rgb(235, 239, 242)' },
+    { statusName: 'Завершено', color: 'rgb(42, 52, 64)' },
+  ]
   return (
     <div>
       <header className={styles.header}>
@@ -29,6 +39,24 @@ const Orders = () => {
           <img src={bell} alt="bell" />
         </div>
       </header>
+      <div className={styles.statusbar}>
+        {statusData.map((status) => (
+          <button
+            className={
+              activeStatus === status.statusName
+                ? styles.activeStatus
+                : styles.status
+            }
+            onClick={() => handleStatusButtonClick(status.statusName)}
+          >
+            <div
+              className={styles.circle}
+              style={{ background: status.color }}
+            ></div>
+            {status.statusName}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
