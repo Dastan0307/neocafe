@@ -50,7 +50,7 @@
 .statusbar {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 25px;
+  margin-top: 25px;  
 }
 .status {
   display: flex;
@@ -85,4 +85,18 @@
   color: white;
   cursor: pointer;
   transition: all 0.3s;
+}
+.container{
+  width: 1100px;
+  display: block;
+  margin: 0 auto;
+  background-color: antiquewhite;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.cardsWrapper{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
 }

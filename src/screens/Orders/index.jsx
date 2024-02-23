@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import { bell } from '../../assets/'
+import NewOrderCard from '@components/Cards/NewOrderCard/NewOrderCard'
 import styles from './orders.module.scss'
+import PaginatedItems from '@components/Pagination'
+import Items from '@components/Pagination'
+
 const Orders = () => {
   const [activeButton, setActiveButton] = useState('На вынос')
   const [activeStatus, setActiveStatus] = useState('Новые')
@@ -39,24 +43,40 @@ const Orders = () => {
           <img src={bell} alt="bell" />
         </div>
       </header>
-      <div className={styles.statusbar}>
-        {statusData.map((status) => (
-          <button
-            className={
-              activeStatus === status.statusName
-                ? styles.activeStatus
-                : styles.status
-            }
-            onClick={() => handleStatusButtonClick(status.statusName)}
-          >
-            <div
-              className={styles.circle}
-              style={{ background: status.color }}
-            ></div>
-            {status.statusName}
-          </button>
-        ))}
+      <div className={styles.container}>
+        <div className={styles.statusbar}>
+          {statusData.map((status) => (
+            <button
+              className={
+                activeStatus === status.statusName
+                  ? styles.activeStatus
+                  : styles.status
+              }
+              onClick={() => handleStatusButtonClick(status.statusName)}
+            >
+              <div
+                className={styles.circle}
+                style={{ background: status.color }}
+              ></div>
+              {status.statusName}
+            </button>
+          ))}
+        </div>
       </div>
+
+      <div className={styles.container}>
+        <div className={styles.cardsWrapper}>
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+          <NewOrderCard />
+        </div>
+      </div>
+      <PaginatedItems itemsPerPage={5} />
     </div>
   )
 }
