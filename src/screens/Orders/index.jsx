@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { bell } from '../../assets/'
+import InProcessCard from '@components/Cards/InProcessCard/InProcessCard'
 import NewOrderCard from '@components/Cards/NewOrderCard/NewOrderCard'
 import styles from './orders.module.scss'
 import PaginatedItems from '@components/Pagination'
@@ -66,14 +67,7 @@ const Orders = () => {
 
       <div className={styles.container}>
         <div className={styles.cardsWrapper}>
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
-          <NewOrderCard />
+          <InProcessCard />
         </div>
       </div>
       <PaginatedItems itemsPerPage={5} />
