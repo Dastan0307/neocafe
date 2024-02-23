@@ -5,6 +5,7 @@ import NewOrderCard from '@components/Cards/NewOrderCard/NewOrderCard'
 import styles from './orders.module.scss'
 import PaginatedItems from '@components/Pagination'
 import Items from '@components/Pagination'
+import ReadyCard from '../../components/Cards/ReadyCard/ReadyCard'
 
 const Orders = () => {
   const [activeButton, setActiveButton] = useState('На вынос')
@@ -67,7 +68,7 @@ const Orders = () => {
 
       <div className={styles.container}>
         <div className={styles.cardsWrapper}>
-          <InProcessCard />
+          <ReadyCard />
         </div>
       </div>
       <PaginatedItems itemsPerPage={5} />

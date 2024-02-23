@@ -39,7 +39,7 @@ const InProcessCard = () => {
     
       const displayedItems = showAllItems
         ? orderData.order
-        : orderData.order.slice(0, 2)
+        : orderData.order.slice(0, 3)
   return (
     <div className={styles.root}>
       <div className={styles.header}>
