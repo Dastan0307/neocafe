@@ -1,40 +1,8 @@
 import React, { useState } from 'react'
 import styles from './newordercard.module.scss'
-const NewOrderCard = () => {
-  const orderData = {
-    id: 'М-47',
-    email: 'user@mail.com',
-    order: [
-      {
-        item: 'Капучино',
-        count: 1,
-      },
-      {
-        item: 'Багровый закат',
-        count: 1,
-      },
-      {
-        item: 'Мохито Клубничный',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-    ],
-  }
+const NewOrderCard = ({data}) => {
+  const orderData = data.data
+
   const [showAllItems, setShowAllItems] = useState(false)
 
   const displayedItems = showAllItems

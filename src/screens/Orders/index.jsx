@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { bell } from '../../assets/'
 import InProcessCard from '@components/Cards/InProcessCard/InProcessCard'
 import NewOrderCard from '@components/Cards/NewOrderCard/NewOrderCard'
@@ -7,16 +7,9 @@ import PaginatedItems from '@components/Pagination'
 import Items from '@components/Pagination'
 import ReadyCard from '../../components/Cards/ReadyCard/ReadyCard'
 import CancelOrderCard from '../../components/Cards/CancelOrderCard/CancelOrderCard'
+import CompletedOrderCard from '../../components/Cards/CompletedOrderCard/CompletedOrderCard'
 
 const Orders = () => {
-  const [activeButton, setActiveButton] = useState('На вынос')
-  const [activeStatus, setActiveStatus] = useState('Новые')
-  const handleButtonClick = (buttonType) => {
-    setActiveButton(buttonType)
-  }
-  const handleStatusButtonClick = (buttonName) => {
-    setActiveStatus(buttonName)
-  }
   const statusData = [
     { statusName: 'Новые', color: 'rgb(133, 202, 255)' },
     { statusName: 'В процессе', color: 'rgb(253, 248, 118)' },
@@ -24,6 +17,84 @@ const Orders = () => {
     { statusName: 'Отменено', color: 'rgb(235, 239, 242)' },
     { statusName: 'Завершено', color: 'rgb(42, 52, 64)' },
   ]
+  const [activeButton, setActiveButton] = useState('На вынос')
+  const [activeStatus, setActiveStatus] = useState('Новые')
+  const orderDataInCafe = {
+    id: 'М-47',
+    email: 'Сергей',
+    order: [
+      {
+        item: 'Капучино',
+        count: 1,
+      },
+      {
+        item: 'Багровый закат',
+        count: 1,
+      },
+      {
+        item: 'Мохито Клубничный',
+        count: 1,
+      },
+      {
+        item: 'Печенье',
+        count: 1,
+      },
+      {
+        item: 'Печенье',
+        count: 1,
+      },
+      {
+        item: 'Печенье',
+        count: 1,
+      },
+      {
+        item: 'Печенье',
+        count: 1,
+      },
+    ],
+  }
+  const orderDataTakeAway = {
+    id: 'B-01',
+    email: 'user@mail.com',
+    order: [
+      {
+        item: 'Американо',
+        count: 1,
+      },
+      {
+        item: 'Медовик',
+        count: 1,
+      },
+      {
+        item: 'Чай черный',
+        count: 1,
+      },
+    ],
+  }
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType)
+  }
+  const handleStatusButtonClick = (buttonName) => {
+    setActiveStatus(buttonName)
+  }
+
+  const renderCardContent = (data) => {
+    switch (activeStatus) {
+      case 'Новые':
+        return <NewOrderCard data={data} />
+      case 'В процессе':
+        return <InProcessCard data={data} />
+      case 'Готово':
+        return <ReadyCard data={data} />
+      case 'Отменено':
+        return <CancelOrderCard data={data} />
+      case 'Завершено':
+        return <CompletedOrderCard data={data} />
+      default:
+        return null
+    }
+  }
+  const MemoizedOrderCard = React.memo(renderCardContent)
   return (
     <div>
       <header className={styles.header}>
@@ -69,7 +140,11 @@ const Orders = () => {
 
       <div className={styles.container}>
         <div className={styles.cardsWrapper}>
-          <CancelOrderCard />
+          {activeButton === 'На вынос' ? (
+            <MemoizedOrderCard data={orderDataTakeAway} />
+          ) : (
+            <MemoizedOrderCard data={orderDataInCafe} />
+          )}
         </div>
       </div>
       <PaginatedItems itemsPerPage={5} />

@@ -10,7 +10,7 @@ import Main from './screens/main/Main'
 import './App.css'
 import Sider from './components/Sider/Sider'
 import Orders from './screens/Orders'
-
+import Cart from './screens/Cart'
 function App() {
   return (
     <>
@@ -21,6 +21,8 @@ function App() {
         <Sider />
         <Orders />
       </div>
+      {/* <Cart/> */}
+
     </>
   )
 }

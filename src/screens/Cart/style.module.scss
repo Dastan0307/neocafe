@@ -1,0 +1,100 @@
+.root {
+  position: absolute;
+  width: 520px;
+  height: 100vh;
+  background: rgb(91, 126, 154);
+  right: 0;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 40px 1fr 70px;
+  .title {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 1fr 30px;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .close {
+    color: rgb(255, 255, 255);
+    font-size: 38px;
+    cursor: pointer;
+  }
+  .addBtn {
+    display: block;
+    margin: 0 auto;
+    width: 472px;
+    height: 56px;
+    padding: 10px;
+    border: 4px solid rgb(244, 115, 86);
+    border-radius: 14px;
+    background: none;
+    color: rgb(244, 115, 86);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .positionWrapper{
+    height: 55vh;
+    overflow-y: auto;
+    margin-top: 20px;
+  }
+  .total {
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__text,
+    &__number {
+      color: rgb(255, 255, 255);
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+  .closeBillBtn {
+    width: 472px;
+    height: 56px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 14px;
+    background: rgb(244, 115, 86);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  ::-webkit-scrollbar {
+    width: 5px; /* ширина для вертикального скроллбара */
+    height: 5px; /* высота для горизонтального скроллбара */
+  }
+
+  /* Обработка ползунка (ручки скроллбара) */
+  ::-webkit-scrollbar-thumb {
+    background: #e6e6e6; /* цвет ползунка */
+    border-radius: 10px; /* скругление углов */
+  }
+
+  /* Обработка ползунка при наведении */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e6e6e6; /* цвет ползунка при наведении */
+  }
+
+  /* Стилизация фона скроллбара (дорожки) */
+  ::-webkit-scrollbar-track {
+    background: #e6e6e6; /* цвет фона дорожки */
+    border-radius: 10px; /* скругление углов */
+  }
+
+  /* Стилизация для Firefox */
+  * {
+    scrollbar-width: thin; /* "auto" или "thin" */
+    scrollbar-color: #888 #f1f1f1; /* ползунок и фон */
+  }
+}
