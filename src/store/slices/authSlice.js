@@ -1,42 +1,42 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
-import axios from 'axios'
-
-const API = 'http://localhost:3001'
+import { api } from '@api/api'
+import { setCookie, removeCookie } from '@hooks/Cookie'
 
 const initialState = {
   name: '',
   code: '',
 }
 
-export const checkEmail = createAsyncThunk('auth/checkEmail', async (data) => {
-  try {
-    const { email, navigate } = data
-    const response = await axios.post(`${API}/users/`, email)
-    navigate('/code')
-    return response.data
-  } catch (error) {
-    toast.error(error)
-  }
-})
+export const checkEmail = createAsyncThunk(
+  'auth/checkEmail',
+  async ({ email, navigate }) => {
+    try {
+      const response = await api.post(`/users/`, email)
+      navigate('/code')
+      setCookie('email', email.email)
+      return response.data
+    } catch (error) {
+      toast.error(error.message)
+    }
+  },
+)
 
-export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
-  let token = JSON.parse(localStorage.getItem('token'))
-  try {
-    const Authorization = `Bearer ${token.access}`
-    let response = await axios.post(
-      `${API}/token/refresh/`,
-      { refresh: token.refresh },
-      { headers: { Authorization } },
-    )
-    localStorage.setItem(
-      'token',
-      JSON.stringify({ refresh: token.refresh, access: response.data.access }),
-    )
-  } catch (error) {
-    toast.errorx('Error', error)
-  }
-})
+export const checkCode = createAsyncThunk(
+  'auth/checkCode',
+  async ({ code_active, navigate, setIsCodeTrue }) => {
+    try {
+      const response = await api.post(`/code/`, code_active)
+      navigate('/main')
+      setIsCodeTrue(false)
+      return response.data
+    } catch (error) {
+      setIsCodeTrue(true)
+      removeCookie('email')
+      toast.error(error.message)
+    }
+  },
+)
 
 const authSlice = createSlice({
   name: 'auth',

@@ -1,0 +1,102 @@
+.header {
+  width: 1150px;
+  height: 102px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  .btnWrapper {
+    display: flex;
+    background: rgb(235, 239, 242);
+    border-radius: 100px;
+  }
+  button {
+    width: 360px;
+    height: 52px;
+    background: rgb(235, 239, 242);
+    border: none;
+    color: rgb(42, 52, 64);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    cursor: pointer;
+    border-radius: 100px;
+  }
+  .active {
+    width: 360px;
+    height: 52px;
+    background: rgb(244, 115, 86);
+    border: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  img {
+    cursor: pointer;
+  }
+}
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+}
+.statusbar {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 25px;  
+}
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 156px;
+  height: 54px;
+  color: rgb(42, 52, 64);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+.activeStatus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 156px;
+  height: 54px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0%;
+  border: none;
+  background: rgb(244, 115, 86);
+  border-radius: 100px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.container{
+  width: 1100px;
+  display: block;
+  margin: 0 auto;
+  background-color: antiquewhite;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.cardsWrapper{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}

@@ -1,0 +1,54 @@
+.root {
+  width: 243px;
+  min-height: 300px;
+  border-radius: 12px;
+
+  box-shadow:
+    0px 4px 8px 0px rgba(0, 0, 0, 0.06),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  background: rgb(255, 255, 255);
+  padding: 16px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn {
+    width: 211px;
+    height: 40px;
+    border: 2px solid rgb(244, 115, 86);
+    border-radius: 12px;
+    background: none;
+    color: rgb(244, 115, 86);
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+
+
+  }
+  p {
+    color: rgb(95, 99, 102);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  li {
+    color: rgb(42, 52, 64);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+}
+.close {
+  font-size: 32px;
+  cursor: pointer;
+}
+.extra {
+  color: rgb(244, 115, 86);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 22px;
+  cursor: pointer;
+}
