@@ -1,20 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 import { api } from '@api/api'
-import { setCookie, removeCookie } from '@hooks/Cookie'
+import { setCookie } from '@hooks/Cookie'
+import { getCookie } from '../../hooks/Cookie'
 
 const initialState = {
   name: '',
   code: '',
 }
 
+const config = {
+  headers: {
+    Authorization: getCookie('pre_token'),
+  },
+}
+
 export const checkEmail = createAsyncThunk(
   'auth/checkEmail',
   async ({ email, navigate }) => {
     try {
-      const response = await api.post(`/users/`, email)
+      const response = await api.post(`/users/login/barista/`, email)
       navigate('/code')
       setCookie('email', email.email)
+      setCookie('pre_token', response.data.pre_token)
       return response.data
     } catch (error) {
       toast.error(error.message)
@@ -24,15 +32,17 @@ export const checkEmail = createAsyncThunk(
 
 export const checkCode = createAsyncThunk(
   'auth/checkCode',
-  async ({ code_active, navigate, setIsCodeTrue }) => {
+  async ({ formData, navigate, setIsCodeTrue }) => {
     try {
-      const response = await api.post(`/code/`, code_active)
+      const response = await api.post(`/users/verify/email/`, formData, config)
       navigate('/main')
       setIsCodeTrue(false)
+      setCookie('refresh', response.data.refresh)
+      setCookie('access', response.data.access)
+      toast.success(response.data.message)
       return response.data
     } catch (error) {
       setIsCodeTrue(true)
-      removeCookie('email')
       toast.error(error.message)
     }
   },
@@ -42,11 +52,6 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(checkEmail.rejected, (state, action) => {
-      toast.error('Такое имя не сущес')
-    })
-  },
 })
 
 export const { setNameEmail } = authSlice.actions

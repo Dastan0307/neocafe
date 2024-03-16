@@ -8,9 +8,9 @@ import './App.css'
 function App() {
   return (
     <>
-      {/* <MainRoutes />
-      <ToastContainer /> */}
-      <LayoutComponent />
+      <MainRoutes />
+      <ToastContainer />
+      {/* <LayoutComponent /> */}
     </>
   )
 }

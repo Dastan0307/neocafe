@@ -6,6 +6,7 @@ import { LoginButton } from '@components/Buttons/LoginButton'
 import { neocafeLogo, loginImg } from '@assets'
 import styles from '../auth.module.scss'
 import { checkCode } from '@store/slices/authSlice'
+import { getCookie } from '../../../hooks/Cookie'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
@@ -20,7 +21,6 @@ const CheckCode = () => {
 
     if (value.match(/^\d+$/)) {
       const newCode = [...code]
-      console.log('new Code', newCode)
       newCode[index] = value
       setCode(newCode)
 
@@ -45,13 +45,25 @@ const CheckCode = () => {
 
   const handleCodeCheck = () => {
     const code_active = code.join('')
-    disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
+    const email = getCookie('email')
+
+    const formData = new FormData()
+    formData.append('otp', code_active)
+    formData.append('email', email)
+
+    disptach(checkCode({ formData, navigate, setIsCodeTrue }))
   }
 
   const handleCodeCheckEnter = (event) => {
     if (event.key === 'Enter') {
       const code_active = code.join('')
-      disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
+      const email = getCookie('email')
+
+      const formData = new FormData()
+      formData.append('otp', code_active)
+      formData.append('email', email)
+
+      disptach(checkCode({ formData, navigate, setIsCodeTrue }))
     }
   }
 
