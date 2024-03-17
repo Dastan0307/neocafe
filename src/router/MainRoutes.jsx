@@ -6,13 +6,13 @@ import Login from '@screens/auth/login/Login'
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
     {
-      link: '/',
-      element: <Login />,
-      id: 1,
-    },
-    {
       link: '/main',
       element: <Main />,
+      id: 21,
+    },
+    {
+      link: '/login',
+      element: <Login />,
       id: 2,
     },
     {

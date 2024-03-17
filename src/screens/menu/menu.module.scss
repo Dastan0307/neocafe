@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.menu {
+  margin: 24px 0 0 32px;
+}
+
+.list__item {
+  width: 150px;
+  height: 52px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(42, 52, 64);
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  background-color: transparent;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 100px;
+    background: rgb(255, 255, 255);
+  }
+}
+
+.list__item_first {
+  width: 126px;
+  height: 52px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: rgb(42, 52, 64);
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  background-color: transparent;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 100px;
+    background: rgb(255, 255, 255);
+  }
+}
+
+.tabs_btn {
+  width: 162px;
+  height: 52px;
+  border-radius: 100px;
+  margin-right: 24px;
+  color: rgb(42, 52, 64);
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  width: 162px;
+  background: rgb(244, 115, 86);
+  margin-right: 24px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+
+  p {
+    color: rgb(255, 255, 255);
+  }
+}
+
+.menu_container {
+  width: 100%;
+  max-width: 1050px;
+  height: 100%;
+  max-height: 500px;
+  margin-top: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.menu__takeout_btn {
+  width: 100%;
+  max-width: 430px;
+  height: 100%;
+  max-height: 77px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px 24px 32px;
+  border-radius: 100px;
+  border: none;
+  background: rgb(244, 115, 86);
+  color: rgb(255, 255, 255);
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 622px;
+  margin-top: 53px;
+
+  span {
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: -1%;
+    text-align: left;
+    margin-left: 50px;
+  }
+}

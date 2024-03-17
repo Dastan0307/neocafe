@@ -47,6 +47,15 @@ export const checkCode = createAsyncThunk(
     }
   },
 )
+export const retrieveСode = createAsyncThunk('auth/retrieveСode', async () => {
+  try {
+    const response = await api.get(`/users/resend-code/`, config)
+    toast.success(response.data.detail)
+    return response.data
+  } catch (error) {
+    toast.error(error.message)
+  }
+})
 
 const authSlice = createSlice({
   name: 'auth',

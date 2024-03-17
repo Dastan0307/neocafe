@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LoginButton } from '@components/Buttons/LoginButton'
 import { neocafeLogo, loginImg } from '@assets'
-import styles from '../auth.module.scss'
-import { checkCode } from '@store/slices/authSlice'
+import { checkCode, retrieveСode } from '@store/slices/authSlice'
 import { getCookie } from '../../../hooks/Cookie'
+import styles from '../auth.module.scss'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
@@ -67,6 +67,10 @@ const CheckCode = () => {
     }
   }
 
+  const handleRetrieveСode = () => {
+    disptach(retrieveСode())
+  }
+
   useEffect(() => {
     if (isCodeTrue) {
       setIsCodeTrue(false)
@@ -121,6 +125,7 @@ const CheckCode = () => {
               ? { color: 'rgba(244, 86, 86, 1)' }
               : { color: 'rgba(95, 99, 102, 1)' }
           }
+          onClick={handleRetrieveСode}
         >
           Отправить повторно
         </button>
