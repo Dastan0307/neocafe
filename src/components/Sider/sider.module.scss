@@ -1,14 +1,9 @@
 .sider {
-  width: 221px;
   height: 100vh;
   text-align: center;
   line-height: 120px;
   color: #fff;
   background-color: rgba(91, 126, 154, 1) !important;
-  // // margin: 0;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
 }
 .navPoint {
   display: flex;
@@ -20,6 +15,7 @@
   gap: 15px;
   margin-bottom: 15px;
   padding: 12px 10px 12px 10px;
+  color: white;
   p {
     color: white;
     margin: 0;
@@ -28,6 +24,11 @@
     margin: 0;
   }
 }
+
+.navPoint:hover {
+  color: white;
+}
+
 .navMenu {
   overflow: hidden;
   display: flex;

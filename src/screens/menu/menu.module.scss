@@ -1,7 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-.menu {
-  margin: 24px 0 0 32px;
+.menu__header {
+  width: 100%;
+  max-width: 1240px;
+  height: 102px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+
+  h3 {
+    width: 99px;
+    height: 38px;
+    color: rgb(42, 52, 64);
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  .input {
+    .input_icon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      margin: 12px 0 0 634px;
+    }
+
+    input {
+      width: 350px;
+      height: 48px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 14px 16px 14px 38px;
+      border-radius: 14px;
+      background: rgb(235, 239, 242);
+      border: none;
+      color: rgb(53, 83, 107);
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+      margin-left: 618px;
+    }
+  }
 }
 
 .list__item {
@@ -82,6 +126,7 @@
   height: 100%;
   max-height: 500px;
   margin-top: 56px;
+  margin-left: 32px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

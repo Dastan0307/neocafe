@@ -1,41 +1,41 @@
-import React, { useState } from 'react'
 import { Layout } from 'antd'
-import { logo, orderIcon, menuIcon, profileIcon  } from '../../assets'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { logo, menuIcon, orderIcon, profileIcon } from '../../assets'
 import styles from './sider.module.scss'
 
 const Sider = () => {
-  const [isActive, setIsActive] = useState(false)
-  const [activeItem, setActiveItem] = useState('Заказы');
-
-  const toggleMenu = (item) => {
-    setActiveItem(item === activeItem ? item : item)
-  }
-
   return (
     <Layout.Sider className={styles.sider}>
       <img src={logo} alt="neocafe" />
       <nav className={styles.navMenu}>
-        <div
-          onClick={() => toggleMenu('Заказы')}
-          className={activeItem === 'Заказы' ? styles.active : styles.navPoint}
+        <NavLink
+          to="/orders"
+          className={({ isActive }) =>
+            [styles.navPoint, isActive ? styles.active : styles.links].join(' ')
+          }
         >
-          <img src={orderIcon} alt="order" />
+          <img src={orderIcon} alt="Error :(" className={styles.sider_icon} />
           Заказы
-        </div>
-        <div
-          onClick={() => toggleMenu('Меню')}
-          className={activeItem === 'Меню' ? styles.active : styles.navPoint}
+        </NavLink>
+        <NavLink
+          to="/menu"
+          className={({ isActive }) =>
+            [styles.navPoint, isActive ? styles.active : styles.links].join(' ')
+          }
         >
-          <img src={menuIcon} alt="menu" />
+          <img src={menuIcon} alt="Error :(" className={styles.sider_icon} />
           Меню
-        </div>
-        <div
-          onClick={() => toggleMenu('Профиль')}
-          className={activeItem === 'Профиль' ? styles.active : styles.navPoint}
+        </NavLink>
+        <NavLink
+          to="/profile"
+          className={({ isActive }) =>
+            [styles.navPoint, isActive ? styles.active : styles.links].join(' ')
+          }
         >
-          <img src={profileIcon} alt="profile" />
+          <img src={profileIcon} alt="Error :(" className={styles.sider_icon} />
           Профиль
-        </div>
+        </NavLink>
       </nav>
     </Layout.Sider>
   )

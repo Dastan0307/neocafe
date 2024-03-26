@@ -1,15 +1,17 @@
-import { Route, Routes } from 'react-router-dom'
+import Orders from '@screens/Orders/index'
+import Menu from '@screens/menu/Menu'
+import Profile from '@screens/profile/Profile'
 import { Layout } from 'antd'
-import Cart from '../../screens/Cart/index'
+import { Route, Routes } from 'react-router-dom'
 import styles from './content.module.scss'
-import Menu from '../../screens/menu/Menu'
 
 const Content = () => {
   return (
     <Layout.Content className={styles.content}>
       <Routes>
-        <Route path="/" element={<Cart />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Layout.Content>
   )

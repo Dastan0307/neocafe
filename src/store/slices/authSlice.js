@@ -20,6 +20,7 @@ export const checkEmail = createAsyncThunk(
   async ({ email, navigate }) => {
     try {
       const response = await api.post(`/users/login/barista/`, email)
+      toast.success(response.data.message)
       navigate('/code')
       setCookie('email', email.email)
       setCookie('pre_token', response.data.pre_token)
@@ -35,6 +36,7 @@ export const checkCode = createAsyncThunk(
   async ({ formData, navigate, setIsCodeTrue }) => {
     try {
       const response = await api.post(`/users/verify/email/`, formData, config)
+      toast.success(response.data.detail)
       navigate('/main')
       setIsCodeTrue(false)
       setCookie('refresh', response.data.refresh)

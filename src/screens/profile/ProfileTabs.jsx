@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import styles from './menu.module.scss'
+import styles from './profile.module.scss'
 
-const MenuTabs = ({ tabs }) => {
+const ProfileTabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0)
 
   return (
     <div className="tabs">
-      <div className="tab-buttons" style={{ margin: '24px 0 0 32px' }}>
+      <div className={styles.tab_btns}>
         {tabs.map((tab, index) => (
           <button
             key={index}
@@ -22,4 +22,4 @@ const MenuTabs = ({ tabs }) => {
   )
 }
 
-export default MenuTabs
+export default ProfileTabs
