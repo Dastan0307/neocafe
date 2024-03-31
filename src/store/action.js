@@ -1,4 +1,4 @@
 import { createAction } from '@reduxjs/toolkit'
 
-const openModal = createAction('modal/open')
-const closeModal = createAction('modal/close')
+export const openModal = createAction('modal/open')
+export const closeModal = createAction('modal/close')

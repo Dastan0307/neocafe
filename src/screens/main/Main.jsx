@@ -5,14 +5,16 @@ import styles from './main.module.scss'
 
 const Main = () => {
   return (
-    <div className={styles.main}>
-      <Layout>
-        <Sider />
+    <>
+      <div className={styles.main}>
         <Layout>
-          <Content />
+          <Sider />
+          <Layout>
+            <Content />
+          </Layout>
         </Layout>
-      </Layout>
-    </div>
+      </div>
+    </>
   )
 }
 

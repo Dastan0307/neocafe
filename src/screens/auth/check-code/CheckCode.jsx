@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { loginImg, neocafeLogo } from '@assets'
+import { LoginButton } from '@components/Buttons/LoginButton'
+import { checkCode, retrieveСode } from '@store/slices/authSlice'
+import { getCookie } from '@untils/Cookie'
 import { Typography } from 'antd'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { LoginButton } from '@components/Buttons/LoginButton'
-import { neocafeLogo, loginImg } from '@assets'
-import { checkCode, retrieveСode } from '@store/slices/authSlice'
-import { getCookie } from '../../../hooks/Cookie'
 import styles from '../auth.module.scss'
 
 const CheckCode = () => {
