@@ -4,8 +4,8 @@
 .order_sider {
   position: absolute;
   width: 100%;
+  height: 100vh;
   max-width: 520px;
-  height: 1024px;
   left: 1052px;
   right: 0;
   top: 0;
@@ -14,8 +14,8 @@
   padding: 24px 24px 32px 24px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  opacity: 1;
 
   .title {
     width: 100%;
@@ -65,7 +65,7 @@
     line-height: 120%;
     letter-spacing: -1%;
     text-align: right;
-    margin-top: 250px;
+    margin-top: 100px;
   }
 
   .add_to_card {
@@ -75,14 +75,19 @@
     right: 96px;
     top: 414px;
     bottom: 315px;
-    margin-top: 64px;
+    margin-top: 44px;
   }
 
+  .footer {
+    width: 100%;
+    height: 100%;
+    max-height: 109px;
+    top: 100px;
+  }
   .sum {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 174px;
 
     span {
       width: 79px;
@@ -114,6 +119,145 @@
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
+    margin-top: 24px;
+  }
+
+  .order__btn_has_product {
+    width: 100%;
+    height: 100%;
+    max-width: 472px;
+    max-height: 56px;
+    padding: 10px;
+    border: none;
+    border-radius: 14px;
+    background: rgb(244, 115, 86);
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 24px;
+  }
+}
+
+.cards {
+  width: 100%;
+  height: 100%;
+  max-height: 450px;
+  overflow: scroll;
+}
+
+.menu__sider_card {
+  width: 100%;
+  height: 100%;
+  max-width: 472px;
+  max-height: 120px;
+  left: 24px;
+  right: 24px;
+  top: 98px;
+  bottom: 806px;
+  border-radius: 14px;
+  box-shadow:
+    0px 8px 16px 0px rgba(0, 0, 0, 0.08),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .menu_card__description {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0 32px 0;
+    margin-left: 12px;
+
+    .card_title {
+      color: rgb(42, 52, 64);
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 120%;
+      letter-spacing: -1%;
+      text-align: left;
+      margin-bottom: 8px;
+    }
+
+    .card_des {
+      color: rgb(42, 52, 64);
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+  }
+  span {
+    width: 100%;
+    color: rgb(244, 115, 86);
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -1%;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card__list_count {
+    width: 100%;
+    height: 100%;
+    max-width: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    border-radius: 12px;
+    background: rgb(244, 115, 86);
+
+    span {
+      width: 24px;
+      height: 24px;
+      color: rgb(255, 255, 255);
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 120%;
+      letter-spacing: -1%;
+      text-align: left;
+      cursor: pointer;
+    }
+  }
+}
+
+.card_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+
+  .card__list_btn {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgb(254, 228, 215);
+    color: rgb(42, 52, 64);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    border: none;
     cursor: pointer;
     margin-top: 24px;
   }

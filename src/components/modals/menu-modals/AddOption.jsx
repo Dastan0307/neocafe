@@ -82,6 +82,7 @@ const AddOption = () => {
           </div>
         </div>
         <div className={styles.add__option_btns}>
+          {/* надо поменять кнопку на тект или на блок  */}
           <button className={styles.add__option_count}>
             <span onClick={handleMinusOptionCount}>-</span>
             {optionCount}

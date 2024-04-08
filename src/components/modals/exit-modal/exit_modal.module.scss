@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.exit_modal {
+  width: 600px;
+  height: 258px;
+  left: 420px;
+  right: 420px;
+  top: 383px;
+  bottom: 383px;
+  border-radius: 20px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+
+  h3 {
+    color: rgb(42, 52, 64);
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 108px;
+  }
+
+  .exit__modal_icon {
+    cursor: pointer;
+  }
+
+  p {
+    color: rgb(42, 52, 64);
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .btns {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+
+    button {
+      width: 260px;
+      height: 56px;
+      left: 32px;
+      top: 170px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+      /* Primary */
+      border: 2px solid rgb(244, 115, 86);
+      border-radius: 10px;
+      color: rgb(244, 115, 86);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0%;
+      text-align: left;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    button:last-child {
+      background: rgb(244, 115, 86);
+      color: rgb(255, 255, 255);
+    }
+  }
+}

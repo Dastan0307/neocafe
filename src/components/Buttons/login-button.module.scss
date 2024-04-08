@@ -10,6 +10,10 @@ $PrimaryColor: rgba(244, 115, 86, 1);
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 18px;
-  color: rgba(254, 254, 254, 1) !important;
+  color: rgba(254, 254, 254, 1);
   border: none;
+
+  > span {
+    color: rgba(254, 254, 254, 1);
+  }
 }

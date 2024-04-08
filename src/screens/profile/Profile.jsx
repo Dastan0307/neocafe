@@ -1,8 +1,9 @@
-import bell from '../../assets/images/Bell.svg'
+import bell from '@assets/images/Bell.svg'
 import ProfileBarmen from './ProfileBarmen'
 import ProfileTabs from './ProfileTabs'
 import WorkSchedule from './WorkSchedule'
 import styles from './profile.module.scss'
+
 const Profile = () => {
   const tabs = [
     {

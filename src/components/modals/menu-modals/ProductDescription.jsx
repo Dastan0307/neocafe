@@ -1,35 +1,36 @@
 import { CloseOutlined } from '@ant-design/icons'
-import coffee from '@assets/images/coffee.png'
+import { getProductById } from '@store/slices/menuSlice'
 import { closeModal } from '@store/slices/modalSlice'
-import { useDispatch } from 'react-redux'
-import { data_coffee } from '@api/menu_products_data'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './menu-modal.module.scss'
 
 const ProductDescription = ({ id }) => {
   const dispatch = useDispatch()
-
-  const cofee_description = data_coffee.find((coffee) => coffee.id === id)
-
-  console.log(cofee_description)
+  const coffee_description = useSelector((state) => state.menu.one_product)
 
   const handleCloseModal = () => {
     dispatch(closeModal())
   }
 
+  useEffect(() => {
+    dispatch(getProductById(id))
+  }, [id, ])
+
   return (
     <div className={styles.container}>
       <div className={styles.product_description}>
         <h3 className={styles.product__description_title}>
-          {cofee_description.name}
+          {coffee_description?.name}
           <CloseOutlined
             className={styles.product__description_icon}
             onClick={handleCloseModal}
           />
         </h3>
         <div className={styles.product__description_image}>
-          <img src={cofee_description.image} alt="Error :(" />
+          <img src={coffee_description?.image} alt="Error :(" />
           <div className={styles.description}>
-            {cofee_description.description}
+            {coffee_description?.description}
           </div>
         </div>
         <p className={styles.list__title}>Основные ингредиенты:</p>

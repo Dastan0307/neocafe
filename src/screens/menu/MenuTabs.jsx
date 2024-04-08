@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './menu.module.scss'
 
-const MenuTabs = ({ tabs }) => {
+const MenuTabs = ({ tabs, setIsActive }) => {
   const [activeTab, setActiveTab] = useState(0)
+
+  useEffect(() => {
+    setIsActive(activeTab)
+  }, [activeTab, ])
 
   return (
     <div className="tabs">

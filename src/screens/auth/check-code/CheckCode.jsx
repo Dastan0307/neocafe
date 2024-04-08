@@ -1,7 +1,7 @@
 import { loginImg, neocafeLogo } from '@assets'
 import { LoginButton } from '@components/Buttons/LoginButton'
 import { checkCode, retrieveСode } from '@store/slices/authSlice'
-import { getCookie } from '@untils/Cookie'
+import { getCookie } from '@utils/Cookie'
 import { Typography } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -75,7 +75,7 @@ const CheckCode = () => {
     if (isCodeTrue) {
       setIsCodeTrue(false)
     }
-  }, [code])
+  }, [code, ])
 
   return (
     <div className={styles.container}>

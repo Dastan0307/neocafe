@@ -1,6 +1,6 @@
 import { api } from '@api/api'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getCookie, setCookie } from '@untils/Cookie'
+import { getCookie, setCookie } from '@utils/Cookie'
 import { toast } from 'react-toastify'
 
 const initialState = {
