@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import {getCookie} from '../untils/Cookie';
 
 const PrivateRouter = () => {
-  // const isAuth = getCookie('isAuth')
-  const isAuth = true
+  const isAuth = Boolean(getCookie('isAuth'))
+  // const isAuth = false
 
   return isAuth ? <Outlet /> : <Navigate to="/login" />
 }
