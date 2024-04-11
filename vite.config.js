@@ -14,7 +14,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@screens': path.resolve(__dirname, 'src/screens'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@untils': path.resolve(__dirname, 'src/untils'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
       '@modals': path.resolve(__dirname, 'src//components/modals'),
     },
   },

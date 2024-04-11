@@ -17,7 +17,7 @@ const ProfileBarmen = () => {
       <div className={styles.inps}>
         <div className={styles.inp}>
           <span>Имя</span>
-          <input type="text" placeholder="" value={data.first_name} />
+          <input type="text" placeholder="" value={data?.first_name} />
         </div>
         <div className={styles.inp}>
           <span>Фамилия</span>
@@ -25,11 +25,11 @@ const ProfileBarmen = () => {
         </div>
         <div className={styles.inp}>
           <span>Почта</span>
-          <input type="text" placeholder="" value={data.email} />
+          <input type="text" placeholder="" value={data?.email} />
         </div>
         <div className={styles.inp}>
           <span>Дата рождения</span>
-          <input type="text" placeholder="" value={data.birth_date} />
+          <input type="text" placeholder="" value={data?.birth_date} />
         </div>
       </div>
     </div>

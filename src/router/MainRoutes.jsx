@@ -3,6 +3,8 @@ import Main from '@screens/main/Main'
 import CheckCode from '@screens/auth/check-code/CheckCode'
 import Login from '@screens/auth/login/Login'
 
+
+// Не исопльзуется 
 const MainRoutes = () => {
   const PUBLIC_ROUTES = [
     {

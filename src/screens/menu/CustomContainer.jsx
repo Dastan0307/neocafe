@@ -4,22 +4,22 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styles from './menu.module.scss'
 
-const CoffeeList = ({ search }) => {
+const CustomContainer = ({ getNameCategory, search }) => {
   const dispatch = useDispatch()
   // const { category, branch_menu } = useSelector(state => state.menu)
   const [id, setId] = useState(null)
   const [count, setCount] = useState(1)
 
-  const searchCoffee = search.toLowerCase()
+  const get_category_product = category.find((product) => product.name === getNameCategory)
 
-  const get_category_coffee = category.find((coffee) => coffee.name === 'Кофе')
-
-  const get_coffee = branch_category.filter(
-    (coffee) => coffee.category === get_category_coffee.id,
+  const get_products = branch_category.filter(
+    (product) => product.category === get_category_product?.id,
   )
 
-  const coffee_db = get_coffee.filter((coffee) =>
-    coffee.name.toLowerCase().includes(searchCoffee),
+  const searchProductByName = search.toLowerCase()
+
+  const products_db = get_products.filter((product) =>
+    product.name.toLowerCase().includes(searchProductByName),
   )
 
   const handleOpenModal = (id) => {
@@ -50,14 +50,14 @@ const CoffeeList = ({ search }) => {
 
   return (
     <div className={styles.menu_container}>
-      {coffee_db?.map((coffee) => (
+      {products_db?.map((product) => (
         <div
-          className={coffee.id === id ? styles.card_count : styles.menu_card}
-          key={coffee.id}
+          className={product.id === id ? styles.card_count : styles.menu_card}
+          key={product.id}
         >
           <div
             className={
-              coffee.id === id
+              product.id === id
                 ? styles.card__count_number
                 : styles.card__count_none
             }
@@ -77,15 +77,15 @@ const CoffeeList = ({ search }) => {
             </button>
           </div>
           <img
-            src={coffee.image}
+            src={product.image}
             alt="Error :("
-            onClick={() => handleOpenModal(coffee.id)}
+            onClick={() => handleOpenModal(product.id)}
           />
           <div className={styles.description}>
-            <p className={styles.title}>{coffee.name}</p>
-            <p className={styles.price}>{coffee.price} с</p>
+            <p className={styles.title}>{product.name}</p>
+            <p className={styles.price}>{product.price} с</p>
           </div>
-          <div className={styles.plus} onClick={() => handleSum(coffee.id)}>
+          <div className={styles.plus} onClick={() => handleSum(product.id)}>
             +
           </div>
         </div>
@@ -94,4 +94,4 @@ const CoffeeList = ({ search }) => {
   )
 }
 
-export default CoffeeList
+export default CustomContainer

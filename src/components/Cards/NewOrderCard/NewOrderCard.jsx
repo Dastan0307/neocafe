@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './newordercard.module.scss'
-const NewOrderCard = ({data}) => {
+const NewOrderCard = ({ data }) => {
   const orderData = data.data
 
   const [showAllItems, setShowAllItems] = useState(false)

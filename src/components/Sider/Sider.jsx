@@ -1,10 +1,22 @@
+import { exit, logo, menuIcon, orderIcon, profileIcon } from '@assets'
+import { openModal } from '@store/slices/modalSlice.js'
 import { Layout } from 'antd'
-import React from 'react'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { logo, menuIcon, orderIcon, profileIcon } from '../../assets'
 import styles from './sider.module.scss'
 
 const Sider = () => {
+  const dispatch = useDispatch()
+  const handleExit = () => {
+    dispatch(
+      openModal({
+        isOpen: true,
+        modalType: 'exit',
+        modalProps: {},
+      }),
+    )
+  }
+
   return (
     <Layout.Sider className={styles.sider}>
       <img src={logo} alt="neocafe" />
@@ -37,6 +49,10 @@ const Sider = () => {
           Профиль
         </NavLink>
       </nav>
+      <button className={styles.sider__btn_exit} onClick={handleExit}>
+        <img src={exit} alt="Error :(" className={styles.sider_icon} />
+        Выйти
+      </button>
     </Layout.Sider>
   )
 }

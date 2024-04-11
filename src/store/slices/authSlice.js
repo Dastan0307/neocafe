@@ -1,6 +1,6 @@
 import { api } from '@api/api'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getCookie, setCookie } from '@untils/Cookie'
+import { getCookie, setCookie } from '@utils/Cookie'
 import { toast } from 'react-toastify'
 
 const initialState = {
@@ -45,7 +45,7 @@ export const checkCode = createAsyncThunk(
     try {
       const response = await api.post(`/users/verify/email/`, formData, config)
       toast.success(response.data.detail)
-      navigate('/main')
+      navigate('/orders')
       setIsCodeTrue(false)
       setCookie('refresh', response.data.refresh)
       setCookie('access', response.data.access)

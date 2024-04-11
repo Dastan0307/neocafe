@@ -1,101 +1,131 @@
-export const data_coffee = [
+export const category = [
   {
     id: 1,
-    name: 'Капучино',
-    description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '100.00',
-    image: 'https://latte.ru/wa-data/public/site/img/capp.jpeg',
-    ingredients: [
-      {
-        id: 1,
-        name: 'Кофе',
-        quantity: 10,
-        measurement_unit: 'мл',
-      },
-    ],
+    name: 'Выпечка',
+    image: null,
   },
   {
     id: 2,
-    name: 'Латте',
-    description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '120.00',
-    image:
-      'https://www.nestleprofessional.ru/sites/default/files/fields/media/field_media_image/CAPPUCCINO-SPOON.jpg',
-    ingredients: [
-      {
-        id: 2,
-        name: 'Кофе',
-        quantity: 110,
-        measurement_unit: 'мл',
-      },
-    ],
+    name: 'Кофе',
+    image: null,
   },
   {
     id: 3,
-    name: 'Раф',
-    description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '150.00',
-    image:
-      'https://img.iamcook.ru/old/upl/recipes/cat/u-8b5af1727094ddd32b8e5ab1c521a0ce.jpg',
-    ingredients: [
-      {
-        id: 3,
-        name: 'Кофе',
-        quantity: 10,
-        measurement_unit: 'мл',
-      },
-    ],
+    name: 'Чай',
+    image: null,
   },
   {
     id: 4,
-    name: 'Эспрессо',
-    description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '170.00',
-    image:
-      'https://coffee-ucc.com/sites/default/files/images/news/17/12/kofeyro-espreso-250-g-zerno-0-250_64fb61b8bf0a30e_800x600.jpg',
-    ingredients: [
-      {
-        id: 4,
-        name: 'Кофе',
-        quantity: 10,
-        measurement_unit: 'мл',
-      },
-    ],
+    name: 'Десерт',
+    image: null,
   },
   {
     id: 5,
-    name: 'Мокачино',
-    description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '140.00',
-    image: 'https://coffe-spb.ru/img/cms/mokko.gif',
-    ingredients: [
-      {
-        id: 5,
-        name: 'Кофе',
-        quantity: 20,
-        measurement_unit: 'мл',
-      },
-    ],
+    name: 'Салат',
+    image: null,
   },
   {
     id: 6,
-    name: 'Американо',
+    name: 'Овощи',
+    image: null,
+  },
+]
+
+export const branch_category = [
+  {
+    id: 38,
+    name: 'Ванильный пудинг',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D0%B2%D0%B0%D0%BD%D0%B8%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%BF%D1%83%D0%B4%D0%B8%D0%BD%D0%B3_b2pmfr',
+    category: 4,
     description:
-      'классический напиток, который покорил сердца ценителей кофе по всему миру. Этот напиток известен своей простотой и в то же время насыщенным вкусом. Кофе Американо приготавливается путем добавления горячей воды к одному или двум эспрессо, что придает напитку более нежный вкус без утраты силы и аромата эспрессо.',
-    price: '150.00',
-    image: 'https://coffe-spb.ru/img/cms/americano.jpg',
-    ingredients: [
-      {
-        id: 6,
-        name: 'Кофе',
-        quantity: 110,
-        measurement_unit: 'г',
-      },
-    ],
+      'Ванильный пудинг — нежное десертное лакомство с нежным ванильным вкусом, приготовленное на молоке и сахаре.',
+    price: '250.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 37,
+    name: 'Клубничный чизкейк',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D0%9A%D0%BB%D1%83%D0%B1%D0%BD%D0%B8%D1%87%D0%BD%D1%8B%D0%B9_%D1%87%D0%B8%D0%B7%D0%BA%D0%B5%D0%B9%D0%BA_ixzpo2',
+    category: 4,
+    description:
+      'Клубничный чизкейк — нежный и кремовый десерт с ярким клубничным вкусом, идеально дополняющий чашечку кофе.',
+    price: '270.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 39,
+    name: 'Лимонный тарт',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D0%BB%D0%B8%D0%BC%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9_%D1%82%D0%B0%D1%80%D1%82_pss4ql',
+    category: 2,
+    description:
+      'Лимонный тарт — освежающий десерт с кисло-сладким вкусом лимона и нежным кремом, который придется по вкусу ценителям необычных вкусовых сочетаний.',
+    price: '300.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 30,
+    name: 'Чизкейк Нью-Йорк',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D1%87%D0%B8%D0%B7%D0%BA%D0%B5%D0%B9%D0%BA_y3ck7e',
+    category: 4,
+    description:
+      'классическое американское десертное блюдо, которое отличается плотной текстурой, богатым вкусом сыра и хрустящим песочным коржом. Этот чизкейк считается одним из самых популярных видов чизкейка в мире благодаря своему насыщенному вкусу и кремовой консистенции.',
+    price: '300.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 35,
+    name: 'Шоколадный фондан',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D1%88%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BE%D0%BD%D0%B4%D0%B0%D0%BD_nrghia',
+    category: 2,
+    description:
+      'Шоколадный фондан — изысканное лакомство с тающим внутри шоколадным сердцем, которое непременно порадует любителей сладкого.',
+    price: '270.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 31,
+    name: 'Шоколадный фондан',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D1%88%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BE%D0%BD%D0%B4%D0%B0%D0%BD_nrghia',
+    category: 3,
+    description:
+      'Шоколадный фондан — изысканное лакомство с тающим внутри шоколадным сердцем, которое непременно порадует любителей сладкого.',
+    price: '270.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 17,
+    name: 'Шоколадный фондан',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D1%88%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BE%D0%BD%D0%B4%D0%B0%D0%BD_nrghia',
+    category: 5,
+    description:
+      'Шоколадный фондан — изысканное лакомство с тающим внутри шоколадным сердцем, которое непременно порадует любителей сладкого.',
+    price: '270.00',
+    available: true,
+    ingredients: [],
+  },
+  {
+    id: 18,
+    name: 'Шоколадный',
+    image:
+      'https://res.cloudinary.com/dbiyaguqb/image/upload/v1/media/menu/images/%D1%88%D0%BE%D0%BA%D0%BE%D0%BB%D0%B0%D0%B4%D0%BD%D1%8B%D0%B9_%D0%B1%D0%BE%D0%BD%D0%B4%D0%B0%D0%BD_nrghia',
+    category: 6,
+    description:
+      'Шоколадный фондан — изысканное лакомство с тающим внутри шоколадным сердцем, которое непременно порадует любителей сладкого.',
+    price: '270.00',
+    available: true,
+    ingredients: [],
   },
 ]
