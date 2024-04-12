@@ -1,100 +1,133 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { bell } from '../../assets/'
-import InProcessCard from '@components/Cards/InProcessCard/InProcessCard'
-import NewOrderCard from '@components/Cards/NewOrderCard/NewOrderCard'
-import styles from './orders.module.scss'
-import PaginatedItems from '@components/Pagination'
+import ReactPaginate from 'react-paginate'
+// import PaginatedItems from '@components/Pagination'
 import Items from '@components/Pagination'
-import ReadyCard from '../../components/Cards/ReadyCard/ReadyCard'
-import CancelOrderCard from '../../components/Cards/CancelOrderCard/CancelOrderCard'
-import CompletedOrderCard from '../../components/Cards/CompletedOrderCard/CompletedOrderCard'
+import { getOrders, changeOrderInfo, getOrderInfo } from '../../api/api'
+import { getProfileUser } from '@store/slices/authSlice'
+import { setOrders, setTakeAwayOrders } from '../../store/slices/ordersSlice'
+import { setActiveStatus } from '../../store/slices/statusSlice'
+import { openModal } from '@store/slices/modalSlice.js'
+import styles from './orders.module.scss'
+
 
 const Orders = () => {
+  const dispatch = useDispatch()
+  const [showAllItems, setShowAllItems] = useState(false)
+
   const statusData = [
-    { statusName: 'Новые', color: 'rgb(133, 202, 255)' },
-    { statusName: 'В процессе', color: 'rgb(253, 248, 118)' },
-    { statusName: 'Готово', color: 'rgb(81, 219, 103)' },
-    { statusName: 'Отменено', color: 'rgb(235, 239, 242)' },
-    { statusName: 'Завершено', color: 'rgb(42, 52, 64)' },
+    {
+      statusName: 'Новый',
+      color: 'rgb(133, 202, 255)',
+      activeBtn: 'Принять',
+      btnStyle: '',
+    },
+    {
+      statusName: 'В процессе',
+      color: 'rgb(253, 248, 118)',
+      activeBtn: '',
+      btnStyle: '',
+    },
+    {
+      statusName: 'Готово',
+      color: 'rgb(81, 219, 103)',
+      activeBtn: 'Заказ готов',
+      btnStyle: '',
+    },
+    {
+      statusName: 'Отменено',
+      color: 'rgb(235, 239, 242)',
+      activeBtn: 'Отменено',
+      btnStyle: '',
+    },
+    {
+      statusName: 'Завершено',
+      color: 'rgb(42, 52, 64)',
+      activeBtn: 'Завершено',
+      btnStyle: '',
+    },
   ]
   const [activeButton, setActiveButton] = useState('На вынос')
-  const [activeStatus, setActiveStatus] = useState('Новые')
-  const orderDataInCafe = {
-    id: 'М-47',
-    email: 'Сергей',
-    order: [
-      {
-        item: 'Капучино',
-        count: 1,
-      },
-      {
-        item: 'Багровый закат',
-        count: 1,
-      },
-      {
-        item: 'Мохито Клубничный',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-      {
-        item: 'Печенье',
-        count: 1,
-      },
-    ],
-  }
-  const orderDataTakeAway = {
-    id: 'B-01',
-    email: 'user@mail.com',
-    order: [
-      {
-        item: 'Американо',
-        count: 1,
-      },
-      {
-        item: 'Медовик',
-        count: 1,
-      },
-      {
-        item: 'Чай черный',
-        count: 1,
-      },
-    ],
-  }
+  const allOrdersData = useSelector((state) => state.orders.orders)
+  const activeStatus = useSelector((state) => state.status.activeStatus)
+  const orderDataTakeAway = useSelector((state) => state.orders.takeawayOrders)
+  const orderData = useSelector((state) => state.orders.cafeOrders)
+  // const orderDataTakeAway = useSelector((state) => state.orders.takeawayOrders)
+
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType)
   }
-  const handleStatusButtonClick = (buttonName) => {
-    setActiveStatus(buttonName)
-  }
 
-  const renderCardContent = (data) => {
-    switch (activeStatus) {
-      case 'Новые':
-        return <NewOrderCard data={data} />
-      case 'В процессе':
-        return <InProcessCard data={data} />
-      case 'Готово':
-        return <ReadyCard data={data} />
-      case 'Отменено':
-        return <CancelOrderCard data={data} />
-      case 'Завершено':
-        return <CompletedOrderCard data={data} />
-      default:
-        return null
+  const handleStatusButtonClick = (buttonName) => {
+    dispatch(setActiveStatus(buttonName))
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getOrders()
+        dispatch(setOrders(res.data))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    dispatch(getProfileUser())
+  }, [])
+
+  const handleOrderStatus = async (id, status) => {
+    console.log(id, status)
+    let updatedOrder
+    let orderIndex = allOrdersData.findIndex((order) => order.id === id)
+    if (status === 'Новый') {
+      updatedOrder = { status: 'В процессе' }
+    } else if (status === 'В процессе') {
+      if (orderIndex !== -1) {
+        updatedOrder = { status: 'Готово' }
+      }
+    } else if (status === 'Готово') {
+      if (orderIndex !== -1) {
+        updatedOrder = { status: 'Завершено' }
+      }
+    }
+    try {
+      changeOrderInfoRequest(id, updatedOrder)
+    } catch (err) {
+      console.log(err)
     }
   }
-  const MemoizedOrderCard = React.memo(renderCardContent)
+
+  const changeOrderInfoRequest = async (id, data) => {
+    try {
+      const res = await changeOrderInfo(id, data)
+      console.log(res)
+      const resp = await getOrders()
+      dispatch(setOrders(resp.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleOrderCart = (id, status) => {
+    if (status === 'Новый') {
+      console.log('handleOrderCart', id, status)
+    }
+  }
+
+  const handleCancelOrder = (id) => {
+    console.log('cancel order', id)
+    dispatch(
+      openModal({
+        isOpen: true,
+        modalType: 'cancelOrder',
+        modalProps: { orderNumber: id },
+      }),
+    )
+  }
+
   return (
     <div>
       <header className={styles.header}>
@@ -137,19 +170,166 @@ const Orders = () => {
           ))}
         </div>
       </div>
-
-      <div className={styles.container}>
+      <div className={styles.cardContainer}>
         <div className={styles.cardsWrapper}>
           {activeButton === 'На вынос' ? (
-            <MemoizedOrderCard data={orderDataTakeAway} />
+            <>
+              {orderDataTakeAway
+                .filter((order) => order.status === activeStatus)
+                .map((order) => (
+                  <div className={styles.cardRoot}>
+                    <div>
+                      <div className={styles.cardHeader}>
+                        <h3>{order.id}</h3>
+                        {order.status === 'Новый' && (
+                          <div
+                            className={styles.close}
+                            onClick={() => handleCancelOrder(order.id)}
+                          >
+                            &times;
+                          </div>
+                        )}
+                      </div>
+                      <p>{order.user_name}</p>
+                      <ul>
+                        {order.items
+                          .slice(0, showAllItems ? order.items.length : 2)
+                          .map((item, index) => (
+                            <li key={index}>
+                              {item.quantity}x {item.menu_detail.name}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                    {order.items.length > 2 && (
+                      <div>
+                        {showAllItems ? null : (
+                          <div
+                            className={styles.extra}
+                            onClick={() => setShowAllItems(true)}
+                          >
+                            Ещё +{order.items.length - 2}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <button
+                      className={`
+                    ${
+                      order.status === 'Готово'
+                        ? styles['btn-gotovo']
+                        : order.status === 'В процессе'
+                          ? styles['btn-inprocess']
+                          : order.status === 'Новый'
+                            ? styles['btn-new']
+                            : order.status === 'Отменено'
+                              ? styles['btn-cancel']
+                              : order.status === 'Завершено'
+                                ? styles['btn-completed']
+                                : ''
+                    }`}
+                      onClick={() => handleOrderStatus(order.id, order.status)}
+                    >
+                      {order.status === 'Готово'
+                        ? 'Заказ готов'
+                        : order.status === 'В процессе'
+                          ? 'Завершить заказ'
+                          : order.status === 'Новый'
+                            ? 'Принять заказ'
+                            : order.status === 'Готово'
+                              ? 'Заказ готов'
+                              : order.status === 'Отменено'
+                                ? 'Заказ отменен'
+                                : order.status === 'Завершено'
+                                  ? 'Заказ завершен'
+                                  : ''}
+                    </button>
+                  </div>
+                ))}
+            </>
           ) : (
-            <MemoizedOrderCard data={orderDataInCafe} />
+            <>
+              {orderData
+                .filter((order) => order.status === activeStatus)
+                .map((order) => (
+                  <div
+                    className={styles.cardRoot}
+                    onClick={() => handleOrderCart(order.id, order.status)}
+                  >
+                    <div>
+                      <div className={styles.cardHeader}>
+                        <h3>{order.id}</h3>
+                        <div
+                          className={styles.close}
+                          onClick={() => handleCancelOrder(order.id)}
+                        >
+                          &times;
+                        </div>
+                      </div>
+                      <p>{order.user_name}</p>
+                      <ul>
+                        {order.items
+                          .slice(0, showAllItems ? order.items.length : 2)
+                          .map((item, index) => (
+                            <li key={index}>
+                              {item.quantity}x {item.menu_detail.name}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                    {order.items.length > 2 && (
+                      <div>
+                        {showAllItems ? null : (
+                          <div
+                            className={styles.extra}
+                            onClick={() => setShowAllItems(true)}
+                          >
+                            Ещё +{order.items.length - 2}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <button
+                      className={`
+                    ${
+                      order.status === 'Готово'
+                        ? styles['btn-gotovo']
+                        : order.status === 'В процессе'
+                          ? styles['btn-inprocess']
+                          : order.status === 'Новый'
+                            ? styles['btn-new']
+                            : order.status === 'Отменено'
+                              ? styles['btn-cancel']
+                              : order.status === 'Завершено'
+                                ? styles['btn-completed']
+                                : ''
+                    }`}
+                      onClick={() => handleOrderStatus(order.id, order.status)}
+                    >
+                      {order.status === 'Готово'
+                        ? 'Заказ готов'
+                        : order.status === 'В процессе'
+                          ? 'Завершить заказ'
+                          : order.status === 'Новый'
+                            ? 'Принять заказ'
+                            : order.status === 'Готово'
+                              ? 'Заказ готов'
+                              : order.status === 'Отменено'
+                                ? 'Заказ отменен'
+                                : order.status === 'Завершено'
+                                  ? 'Заказ завершен'
+                                  : ''}
+                    </button>
+                  </div>
+                ))}
+            </>
           )}
         </div>
       </div>
-      <PaginatedItems itemsPerPage={5} />
+
     </div>
   )
 }
-
 export default Orders
+
+

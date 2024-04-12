@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import styles from './newordercard.module.scss'
 const NewOrderCard = ({ data }) => {
-  const orderData = data.data
 
+  // data.data
+  const orderData = useSelector(state => state.orders.takeawayNewOrders)
+  console.log('orderData new', orderData)
+  // useSelector(state => state.orders.takeawayNewOrders)
+  
   const [showAllItems, setShowAllItems] = useState(false)
 
   const displayedItems = showAllItems
@@ -15,7 +20,7 @@ const NewOrderCard = ({ data }) => {
         <h3>{orderData.id}</h3>
         <div className={styles.close}>&times;</div>
       </div>
-      <p>{orderData.email}</p>
+      <p>{orderData.user_name}</p>
       <ul>
         {displayedItems.map((item, index) => (
           <li key={index}>

@@ -17,6 +17,7 @@ function Items({ currentItems }) {
     </>
   )
 }
+
 export default function PaginatedItems({ itemsPerPage }) {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
@@ -58,3 +59,4 @@ export default function PaginatedItems({ itemsPerPage }) {
     </>
   )
 }
+

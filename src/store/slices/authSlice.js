@@ -45,6 +45,7 @@ export const checkCode = createAsyncThunk(
     try {
       const response = await api.post(`/users/verify/email/`, formData, config)
       toast.success(response.data.detail)
+      console.log(response.data)
       navigate('/orders')
       setIsCodeTrue(false)
       setCookie('refresh', response.data.refresh)
