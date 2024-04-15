@@ -34,11 +34,7 @@ export default function PaginatedOrderCards({
         {activeButton === 'На вынос' && (
           <>
             {currentOrders.map((order) => (
-              <div
-                className={styles.cardRoot}
-                key={order.id}
-                onClick={() => handleOrderCart(order)}
-              >
+              <div className={styles.cardRoot} key={order.id}>
                 <div>
                   <div className={styles.cardHeader}>
                     <h3>{order.id}</h3>
@@ -51,29 +47,34 @@ export default function PaginatedOrderCards({
                       </div>
                     )}
                   </div>
-                  <p>{order.user_name}</p>
-                  <ul>
-                    {order.items
-                      .slice(0, showAllItems ? order.items.length : 2)
-                      .map((item, index) => (
-                        <li key={index}>
-                          {item.quantity}x {item.menu_detail.name}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-                {order.items.length > 2 && (
-                  <div>
-                    {!showAllItems && (
-                      <div
-                        className={styles.extra}
-                        onClick={() => setShowAllItems(true)}
-                      >
-                        Ещё +{order.items.length - 2}
-                      </div>
-                    )}
+
+                  <div onClick={() => handleOrderCart(order)}>
+                    <p>{order.user_name}</p>
+                    <ul>
+                      {order.items
+                        .slice(0, showAllItems ? order.items.length : 2)
+                        .map((item, index) => (
+                          <li key={index}>
+                            {item.quantity}x {item.menu_detail.name}
+                          </li>
+                        ))}
+                    </ul>
                   </div>
-                )}
+
+                  {order.items.length > 2 && (
+                    <div onClick={() => handleOrderCart(order)}>
+                      {!showAllItems && (
+                        <div
+                          className={styles.extra}
+                          onClick={() => setShowAllItems(true)}
+                        >
+                          Ещё +{order.items.length - 2}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
                 <button
                   className={`
               ${

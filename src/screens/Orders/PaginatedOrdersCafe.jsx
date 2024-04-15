@@ -34,46 +34,46 @@ export default function PaginatedOrderCardsCafe({
         {activeButton === 'В заведении' && (
           <>
             {currentOrders.map((order) => (
-              <div
-                className={styles.cardRoot}
-                key={order.id}
-                onClick={() => handleOrderCart(order)}
-              >
-                <div>
-                  <div className={styles.cardHeader}>
-                    <h3>{order.id}</h3>
-                    {order.status === 'Новый' && (
-                      <div
-                        className={styles.close}
-                        onClick={() => handleCancelOrder(order.id)}
-                      >
-                        &times;
-                      </div>
-                    )}
-                  </div>
-                  <p>{order.user_name}</p>
-                  <ul>
-                    {order.items
-                      .slice(0, showAllItems ? order.items.length : 2)
-                      .map((item, index) => (
-                        <li key={index}>
-                          {item.quantity}x {item.menu_detail.name}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-                {order.items.length > 2 && (
+              <div className={styles.cardRoot} key={order.id}>
+                <div onClick={() => handleOrderCart(order)}>
                   <div>
-                    {!showAllItems && (
-                      <div
-                        className={styles.extra}
-                        onClick={() => setShowAllItems(true)}
-                      >
-                        Ещё +{order.items.length - 2}
-                      </div>
-                    )}
+                    <div className={styles.cardHeader}>
+                      <h3>{order.id}</h3>
+                      {order.status === 'Новый' && (
+                        <div
+                          className={styles.close}
+                          onClick={() => handleCancelOrder(order.id)}
+                        >
+                          &times;
+                        </div>
+                      )}
+                    </div>
+                    <div onClick={() => handleOrderCart(order)}>
+                      <p>{order.user_name}</p>
+                      <ul>
+                        {order.items
+                          .slice(0, showAllItems ? order.items.length : 2)
+                          .map((item, index) => (
+                            <li key={index}>
+                              {item.quantity}x {item.menu_detail.name}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
                   </div>
-                )}
+                  {order.items.length > 2 && (
+                    <div onClick={() => handleOrderCart(order)}>
+                      {!showAllItems && (
+                        <div
+                          className={styles.extra}
+                          onClick={() => setShowAllItems(true)}
+                        >
+                          Ещё +{order.items.length - 2}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
                 <button
                   className={`
                     ${
