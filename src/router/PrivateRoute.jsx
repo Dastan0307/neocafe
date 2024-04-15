@@ -3,7 +3,8 @@ import { getCookie } from '@utils/Cookie'
 
 const PrivateRouter = () => {
   // const isAuth = getCookie('access')
-  const isAuth = true
+  const isAuth = Boolean(getCookie('isAuth'))
+  // const isAuth = true
 
   return isAuth ? <Outlet /> : <Navigate to="/login" />
 }

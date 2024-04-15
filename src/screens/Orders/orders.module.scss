@@ -50,7 +50,7 @@
 .statusbar {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 25px;  
+  margin-top: 25px;
 }
 .status {
   display: flex;
@@ -65,10 +65,11 @@
   line-height: 30px;
   letter-spacing: 0%;
   text-align: center;
+  border-radius: 100px;
   border: none;
   cursor: pointer;
 }
-.activeStatus{
+.activeStatus {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,17 +87,177 @@
   cursor: pointer;
   transition: all 0.3s;
 }
-.container{
+.cardContainer {
   width: 1100px;
   display: block;
   margin: 0 auto;
-  background-color: antiquewhite;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  // background-color: antiquewhite;
+  padding-top: 10px;
+  // padding-bottom: 25px;
 }
-.cardsWrapper{
+.cardsWrapper {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
 }
+
+.cardRoot {
+  width: 243px;
+  min-height: 300px;
+  border-radius: 12px;
+  box-shadow:
+    0px 4px 8px 0px rgba(0, 0, 0, 0.06),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  background: rgb(255, 255, 255);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // :hover{
+  //   background-color: lightblue; /* Цвет фона при наведении */
+  // }
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn {
+    width: 211px;
+    height: 40px;
+    border: 2px solid rgb(244, 115, 86);
+    border-radius: 12px;
+    background: none;
+    color: rgb(244, 115, 86);
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  p {
+    color: rgb(95, 99, 102);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+  li {
+    color: rgb(42, 52, 64);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+}
+.close {
+  font-size: 32px;
+  cursor: pointer;
+}
+.extra {
+  color: rgb(244, 115, 86);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 22px;
+  cursor: pointer;
+}
+.btn {
+  background-color: white;
+  cursor: pointer;
+  &-gotovo {
+    color: rgb(81, 219, 103);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    border: none;
+    background-color: white;
+  }
+  &-completed {
+    color: rgb(42, 52, 64);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    border: none;
+    background-color: white;
+
+  }
+  &-inprocess{
+    color: rgb(253, 248, 118);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+
+  }
+  &-cancel{
+    color: rgb(95, 99, 102);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    border: none;
+    background-color: white;
+  }
+  &-new{
+    width: 211px;
+    height: 40px;
+    border: 2px solid rgb(244, 115, 86);
+    border-radius: 12px;
+    background: none;
+    color: rgb(244, 115, 86);
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+}
+.pagination {
+  margin: 0 auto;
+  max-width: 550px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  margin-top: 25px;
+  a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(81, 81, 81);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    cursor: pointer;
+  }
+  .selected {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: rgb(235, 239, 242);
+  }
+  .next:hover,
+  .previous:hover {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgb(91, 126, 154);
+    a {
+      color: rgb(235, 239, 242);
+    }
+  }
+}
+

@@ -6,6 +6,7 @@ import PrivateRouter from './router/PrivateRoute'
 import CheckCode from './screens/auth/check-code/CheckCode'
 import Login from './screens/auth/login/Login'
 import Main from './screens/main/Main'
+import Orders from './screens/Orders'
 
 function App() {
   return (
