@@ -32,6 +32,7 @@ export const checkEmail = createAsyncThunk(
       setCookie('email', email.email)
       setCookie('pre_token', response.data.pre_token)
       setCookie('isAuth', false)
+      config.headers.Authorization = response.data.pre_token
       return response.data
     } catch (error) {
       toast.error(error.message)
