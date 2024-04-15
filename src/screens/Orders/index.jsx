@@ -114,7 +114,7 @@ const Orders = () => {
         openModal({
           isOpen: true,
           modalType: 'cart',
-          modalProps: { order: order },
+          modalProps: { order: order, handleOrderStatus: handleOrderStatus, handleCancelOrder: handleCancelOrder },
         }),
       )
     }
