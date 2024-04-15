@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Cart from '../Cart'
 import ReactPaginate from 'react-paginate'
 
 export default function PaginatedOrderCards({
@@ -10,14 +11,17 @@ export default function PaginatedOrderCards({
   setShowAllItems,
   handleOrderStatus,
   activeButton,
+  handleOrderCart,
 }) {
-  const itemsPerPage = 4;
+  const itemsPerPage = 4
   const [itemOffset, setItemOffset] = useState(0)
-  const filteredOrders = orderDataTakeAway.filter((order) => order.status === activeStatus)
+  const filteredOrders = orderDataTakeAway.filter(
+    (order) => order.status === activeStatus,
+  )
   const pageCount = Math.ceil(filteredOrders.length / itemsPerPage)
   const endOffset = itemOffset + itemsPerPage
   const currentOrders = filteredOrders.slice(itemOffset, endOffset)
-  
+
   const handlePageClick = ({ selected }) => {
     const newOffset = selected * itemsPerPage
     setItemOffset(newOffset)
@@ -30,7 +34,11 @@ export default function PaginatedOrderCards({
         {activeButton === 'На вынос' && (
           <>
             {currentOrders.map((order) => (
-              <div className={styles.cardRoot} key={order.id}>
+              <div
+                className={styles.cardRoot}
+                key={order.id}
+                onClick={() => handleOrderCart(order)}
+              >
                 <div>
                   <div className={styles.cardHeader}>
                     <h3>{order.id}</h3>
@@ -68,19 +76,19 @@ export default function PaginatedOrderCards({
                 )}
                 <button
                   className={`
-                    ${
-                      order.status === 'Готово'
-                        ? styles['btn-gotovo']
-                        : order.status === 'В процессе'
-                          ? styles['btn-inprocess']
-                          : order.status === 'Новый'
-                            ? styles['btn-new']
-                            : order.status === 'Отменено'
-                              ? styles['btn-cancel']
-                              : order.status === 'Завершено'
-                                ? styles['btn-completed']
-                                : ''
-                    }`}
+              ${
+                order.status === 'Готово'
+                  ? styles['btn-gotovo']
+                  : order.status === 'В процессе'
+                    ? styles['btn-inprocess']
+                    : order.status === 'Новый'
+                      ? styles['btn-new']
+                      : order.status === 'Отменено'
+                        ? styles['btn-cancel']
+                        : order.status === 'Завершено'
+                          ? styles['btn-completed']
+                          : ''
+              }`}
                   onClick={() => handleOrderStatus(order.id, order.status)}
                 >
                   {order.status === 'Готово'
@@ -100,7 +108,7 @@ export default function PaginatedOrderCards({
               </div>
             ))}
           </>
-        ) }
+        )}
       </div>
       <ReactPaginate
         breakLabel="..."

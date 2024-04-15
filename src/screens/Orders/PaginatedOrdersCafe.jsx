@@ -10,16 +10,18 @@ export default function PaginatedOrderCardsCafe({
   handleOrderStatus,
   activeButton,
   orderDataCafe,
+  handleOrderCart,
 }) {
-  console.log('orderDataCafe', orderDataCafe)
-  const itemsPerPage = 4 
+  const itemsPerPage = 4
   const [itemOffset, setItemOffset] = useState(0)
 
-  const filteredOrders = orderDataCafe.filter((order) => order.status === activeStatus)
+  const filteredOrders = orderDataCafe.filter(
+    (order) => order.status === activeStatus,
+  )
   const pageCount = Math.ceil(filteredOrders.length / itemsPerPage)
   const endOffset = itemOffset + itemsPerPage
   const currentOrders = filteredOrders.slice(itemOffset, endOffset)
-  
+
   const handlePageClick = ({ selected }) => {
     const newOffset = selected * itemsPerPage
     setItemOffset(newOffset)
@@ -32,7 +34,11 @@ export default function PaginatedOrderCardsCafe({
         {activeButton === 'В заведении' && (
           <>
             {currentOrders.map((order) => (
-              <div className={styles.cardRoot} key={order.id}>
+              <div
+                className={styles.cardRoot}
+                key={order.id}
+                onClick={() => handleOrderCart(order)}
+              >
                 <div>
                   <div className={styles.cardHeader}>
                     <h3>{order.id}</h3>
@@ -102,7 +108,7 @@ export default function PaginatedOrderCardsCafe({
               </div>
             ))}
           </>
-        ) }
+        )}
       </div>
       <ReactPaginate
         breakLabel="..."

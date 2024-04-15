@@ -52,6 +52,8 @@ const Orders = () => {
   const orderDataTakeAway = useSelector((state) => state.orders.takeawayOrders)
   const orderDataCafe = useSelector((state) => state.orders.cafeOrders)
 
+  const [isCartActive, setIsCartActive] = useState(false)
+
   const handleButtonClick = (buttonType) => {
     setActiveButton(buttonType)
   }
@@ -106,9 +108,15 @@ const Orders = () => {
     }
   }
 
-  const handleOrderCart = (id, status) => {
-    if (status === 'Новый') {
-      console.log('handleOrderCart', id, status)
+  const handleOrderCart = (order) => {
+    if (order.status === 'Новый') {
+      dispatch(
+        openModal({
+          isOpen: true,
+          modalType: 'cart',
+          modalProps: { order: order },
+        }),
+      )
     }
   }
 
