@@ -1,12 +1,11 @@
-import { loginImg, neocafeLogo } from '@assets'
-import { LoginButton } from '@components/Buttons/LoginButton'
-import { checkCode, retrieveСode } from '@store/slices/authSlice'
-import { getCookie } from '@utils/Cookie'
+import React, { useState, useRef, useEffect } from 'react'
 import { Typography } from 'antd'
-import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { LoginButton } from '@components/Buttons/LoginButton'
+import { neocafeLogo, loginImg } from '@assets'
 import styles from '../auth.module.scss'
+import { checkCode } from '@store/slices/authSlice'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
@@ -21,6 +20,7 @@ const CheckCode = () => {
 
     if (value.match(/^\d+$/)) {
       const newCode = [...code]
+      console.log('new Code', newCode)
       newCode[index] = value
       setCode(newCode)
 
@@ -45,37 +45,21 @@ const CheckCode = () => {
 
   const handleCodeCheck = () => {
     const code_active = code.join('')
-    const email = getCookie('email')
-
-    const formData = new FormData()
-    formData.append('otp', code_active)
-    formData.append('email', email)
-
-    disptach(checkCode({ formData, navigate, setIsCodeTrue }))
+    disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
   }
 
   const handleCodeCheckEnter = (event) => {
     if (event.key === 'Enter') {
       const code_active = code.join('')
-      const email = getCookie('email')
-
-      const formData = new FormData()
-      formData.append('otp', code_active)
-      formData.append('email', email)
-
-      disptach(checkCode({ formData, navigate, setIsCodeTrue }))
+      disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
     }
-  }
-
-  const handleRetrieveСode = () => {
-    disptach(retrieveСode())
   }
 
   useEffect(() => {
     if (isCodeTrue) {
       setIsCodeTrue(false)
     }
-  }, [code, ])
+  }, [code])
 
   return (
     <div className={styles.container}>
@@ -125,7 +109,6 @@ const CheckCode = () => {
               ? { color: 'rgba(244, 86, 86, 1)' }
               : { color: 'rgba(95, 99, 102, 1)' }
           }
-          onClick={handleRetrieveСode}
         >
           Отправить повторно
         </button>
