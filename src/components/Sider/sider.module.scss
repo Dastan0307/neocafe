@@ -7,6 +7,12 @@
   line-height: 120px;
   color: #fff;
   background-color: rgba(91, 126, 154, 1) !important;
+  .wrapper{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 .navPoint {
   display: flex;
@@ -76,7 +82,7 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-top: 430px;
+  // margin-top: 430px;
 
   img {
     width: 36px;
