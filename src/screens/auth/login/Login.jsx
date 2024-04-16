@@ -1,21 +1,15 @@
-import { Formik, Form, Field } from 'formik'
-import * as Yup from 'yup'
+import { Field, Form, Formik } from 'formik'
+import { loginImg, neocafeLogo } from '@assets'
+import { checkEmail } from '@store/slices/authSlice'
+import { validationSchema } from '@utils/Validate'
+import { Typography } from 'antd'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Typography } from 'antd'
-import { checkEmail } from '@store/slices/authSlice'
-import { neocafeLogo, loginImg } from '@assets'
 import styles from '../auth.module.scss'
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Некорректный формат email')
-      .required('Email обязателен'),
-  })
 
   const handleSubmit = (email) => {
     dispatch(checkEmail({ email, navigate }))

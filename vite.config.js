@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import reactRefresh from '@vitejs/plugin-react-refresh'
 import path from 'path'
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), reactRefresh()],
   resolve: {
     alias: {
       '@api': path.resolve(__dirname, 'src/api'),
@@ -13,6 +14,15 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@screens': path.resolve(__dirname, 'src/screens'),
       '@store': path.resolve(__dirname, 'src/store'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@modals': path.resolve(__dirname, 'src//components/modals'),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/scss/app.scss";`,
+      },
     },
   },
 })
