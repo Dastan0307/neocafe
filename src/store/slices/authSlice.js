@@ -41,6 +41,7 @@ export const checkEmail = createAsyncThunk(
 export const checkCode = createAsyncThunk(
   'auth/checkCode',
   async ({ formData, navigate, setIsCodeTrue }) => {
+    console.log(formData);
     try {
       const response = await api.post(`/users/verify/email/`, formData, config)
       toast.success(response.data.detail)

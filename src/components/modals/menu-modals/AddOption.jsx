@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styles from './menu-modal.module.scss'
 
-const AddOption = () => {
+const AddOption = ({ id }) => {
   const dispatch = useDispatch()
   const [optionCount, setOptionCount] = useState(1)
-
+  
   const handlePlusOptionCount = () => {
     setOptionCount(optionCount + 1)
   }

@@ -4,13 +4,21 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styles from './menu.module.scss'
 
-const CustomContainer = ({ getNameCategory, search }) => {
+const CustomContainer = ({
+  categoryName,
+  search,
+  products,
+  setProducts,
+  count,
+  setCount,
+}) => {
+  const [id, setId] = useState(null)
   const dispatch = useDispatch()
   // const { category, branch_menu } = useSelector(state => state.menu)
-  const [id, setId] = useState(null)
-  const [count, setCount] = useState(1)
 
-  const get_category_product = category.find((product) => product.name === getNameCategory)
+  const get_category_product = category.find(
+    (product) => product.name === categoryName,
+  )
 
   const get_products = branch_category.filter(
     (product) => product.category === get_category_product?.id,
@@ -34,9 +42,59 @@ const CustomContainer = ({ getNameCategory, search }) => {
     )
   }
 
+  // const handleOptionOpenModal = () => {
+  //   dispatch(
+  //     openModal({
+  //       isOpen: true,
+  //       modalType: 'addOption',
+  //       modalProps: {
+  //         id: id,
+  //       },
+  //     }),
+  //   )
+  // }
+
   const handleSum = (id) => {
     setId(id)
+    // handleOptionOpenModal()
+    const product = products_db.find((prod) => prod.id === id)
+    setProducts((prevState) => [...prevState, product])
   }
+
+  const addProductInStock = () => {
+    setCount(count + 1)
+    const product = products_db.find((prod) => prod.id === id)
+    setProducts((prevState) => [...prevState, product])
+  }
+
+  const deleteOneProductInStock = () => {
+    setCount(count - 1)
+    setProducts((prevState) => {
+      const index = prevState.findIndex((item) => item.id === id)
+      if (index !== -1) {
+        const newProducts = [
+          ...prevState.slice(0, index),
+          ...prevState.slice(index + 1),
+        ]
+        return newProducts
+      }
+      return prevState // Если элемент с заданным id не найден, возвращаем предыдущее состояние без изменений
+    })
+  }
+
+  // Создаем объект для хранения количества каждого уникального продукта
+  const productCountMap = {}
+
+  // Перебираем каждый продукт в массиве
+  products.forEach((product) => {
+    // Если продукт еще не добавлен в объект productCountMap, добавляем его
+    if (!productCountMap[product.id]) {
+      productCountMap[product.id] = 1
+    } else {
+      // Если продукт уже добавлен в объект, увеличиваем его счетчик
+      productCountMap[product.id]++
+    }
+  })
 
   useEffect(() => {
     setCount(1)
@@ -64,14 +122,14 @@ const CustomContainer = ({ getNameCategory, search }) => {
           >
             <button
               className={styles.card__count_btn}
-              onClick={() => setCount(count - 1)}
+              onClick={deleteOneProductInStock}
             >
               -
             </button>
-            <p>{count}</p>
+            <p>{productCountMap[id]}</p>
             <button
               className={styles.card__count_btn}
-              onClick={() => setCount(count + 1)}
+              onClick={addProductInStock}
             >
               +
             </button>

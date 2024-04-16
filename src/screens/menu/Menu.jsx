@@ -12,17 +12,14 @@ import {
   pastry,
   pastryActive,
 } from '@assets/index.js'
+import OrderSider from '@components/OrderSider/OrderSider'
 import { getBranchesMenu } from '@store/slices/menuSlice'
+import { getCookie } from '@utils/Cookie.js'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import OrderSider from '../../components/OrderSider/OrderSider'
-import CoffeeList from './CoffeeList'
-import DessertList from './DessertList'
-import DrinksList from './DrinksList'
-import MenuTabs from './MenuTabs'
-import PastryList from './PastryList'
-import styles from './menu.module.scss'
 import CustomContainer from './CustomContainer'
+import MenuTabs from './MenuTabs'
+import styles from './menu.module.scss'
 
 const category = [
   {
@@ -58,11 +55,27 @@ const category = [
 ]
 const Menu = () => {
   const dispatch = useDispatch()
+  const username = getCookie('email')
   // const { category } = useSelector(state => state.menu)
+
   const [toggleSider, setToggleSider] = useState(false)
   const [isAcitve, setIsActive] = useState(0)
   const [search, setSearch] = useState('')
-  const [getNameCategory, setGetNameCategory] = useState('')
+  const [categoryName, setCategoryName] = useState('')
+  const [products, setProducts] = useState([])
+  const [count, setCount] = useState(1)
+  const [items, setItems] = useState([
+    {
+      menu_id: 0,
+      quantity: 2147483647,
+      extra_product: [
+        {
+          id: 0,
+          quantity: 0,
+        },
+      ],
+    },
+  ])
 
   const filter_category = category.filter(
     (category) =>
@@ -84,7 +97,16 @@ const Menu = () => {
           Кофе
         </p>
       ),
-      content: <CoffeeList search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName="Кофе"
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
@@ -97,7 +119,16 @@ const Menu = () => {
           Выпечка
         </p>
       ),
-      content: <PastryList search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName="Выпечка"
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
@@ -110,7 +141,16 @@ const Menu = () => {
           Десерты
         </p>
       ),
-      content: <DessertList search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName="Десерт"
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
@@ -123,13 +163,22 @@ const Menu = () => {
           Напитки
         </p>
       ),
-      content: <DrinksList search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName="Напитки"
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
         <p
           className={styles.list__item}
-          onClick={() => setGetNameCategory(filter_category[0].name)}
+          onClick={() => setCategoryName(filter_category[0].name)}
         >
           {isAcitve === 4 ? (
             <img src={custom_svg_active} alt="dessert" />
@@ -139,13 +188,22 @@ const Menu = () => {
           {filter_category[0].name}
         </p>
       ),
-      content: <CustomContainer getNameCategory={getNameCategory} search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName={categoryName}
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
         <p
           className={styles.list__item}
-          onClick={() => setGetNameCategory(filter_category[1].name)}
+          onClick={() => setCategoryName(filter_category[1].name)}
         >
           {isAcitve === 5 ? (
             <img src={custom_svg_active} alt="dessert" />
@@ -155,13 +213,22 @@ const Menu = () => {
           {filter_category[1].name}
         </p>
       ),
-      content: <CustomContainer getNameCategory={getNameCategory} search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName={categoryName}
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
     {
       label: (
         <p
           className={styles.list__item}
-          onClick={() => setGetNameCategory(filter_category[2].name)}
+          onClick={() => setCategoryName(filter_category[2].name)}
         >
           {isAcitve === 6 ? (
             <img src={custom_svg_active} alt="dessert" />
@@ -171,7 +238,16 @@ const Menu = () => {
           {filter_category[2].name}
         </p>
       ),
-      content: <CustomContainer getNameCategory={getNameCategory} search={search} />,
+      content: (
+        <CustomContainer
+          products={products}
+          setProducts={setProducts}
+          categoryName={categoryName}
+          search={search}
+          count={count}
+          setCount={setCount}
+        />
+      ),
     },
   ]
 
@@ -189,6 +265,12 @@ const Menu = () => {
     // )
     handleOpenSider()
   }
+
+  const totalSum = products.reduce(
+    (prod, currentProd) => prod + +currentProd.price,
+    0,
+  )
+
 
   useEffect(() => {
     dispatch(getBranchesMenu())
@@ -210,12 +292,18 @@ const Menu = () => {
       </header>
       <MenuTabs tabs={tabs} setIsActive={setIsActive} />
       <button className={styles.menu__takeout_btn} onClick={handleOpenModal}>
-        Заказ на вынос <span>0 сом</span>
+        Заказ на вынос <span>{totalSum} сом</span>
       </button>
       {toggleSider && (
         <OrderSider
+          setProducts={setProducts}
           handleOpenSider={handleOpenSider}
           toggleSider={toggleSider}
+          items={items}
+          setItems={setItems}
+          count={count}
+          setCount={setCount}
+          products={products}
         />
       )}
     </div>

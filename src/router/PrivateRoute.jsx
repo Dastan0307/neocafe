@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { getCookie } from '@utils/Cookie'
+// import { getCookie } from '@utils/Cookie'
 
 const PrivateRouter = () => {
   // const isAuth = getCookie('access')
