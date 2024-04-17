@@ -69,8 +69,8 @@
 }
 
 .sider__btn_exit {
-  width: 157px;
-  height: 44px;
+  // width: 157px;
+  // height: 44px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -82,7 +82,7 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
-  // margin-top: 430px;
+  margin-bottom: -90px;
 
   img {
     width: 36px;

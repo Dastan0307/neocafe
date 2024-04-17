@@ -16,47 +16,16 @@ import OrderSider from '@components/OrderSider/OrderSider'
 import { getBranchesMenu } from '@store/slices/menuSlice'
 import { getCookie } from '@utils/Cookie.js'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCategory } from '../../store/slices/menuSlice'
 import CustomContainer from './CustomContainer'
 import MenuTabs from './MenuTabs'
 import styles from './menu.module.scss'
 
-const category = [
-  {
-    id: 1,
-    name: 'Выпечка',
-    image: null,
-  },
-  {
-    id: 2,
-    name: 'Кофе',
-    image: null,
-  },
-  {
-    id: 3,
-    name: 'Чай',
-    image: null,
-  },
-  {
-    id: 4,
-    name: 'Десерт',
-    image: null,
-  },
-  {
-    id: 5,
-    name: 'Салат',
-    image: null,
-  },
-  {
-    id: 6,
-    name: 'Овощи',
-    image: null,
-  },
-]
 const Menu = () => {
   const dispatch = useDispatch()
   const username = getCookie('email')
-  // const { category } = useSelector(state => state.menu)
+  const { category } = useSelector((state) => state.menu)
 
   const [toggleSider, setToggleSider] = useState(false)
   const [isAcitve, setIsActive] = useState(0)
@@ -79,10 +48,10 @@ const Menu = () => {
 
   const filter_category = category.filter(
     (category) =>
-      (category.name !== 'Кофе') &
-      (category.name !== 'Десерт') &
-      (category.name !== 'Выпечка') &
-      (category.name !== 'Напитки'),
+      (category?.name !== 'Кофе') &
+      (category?.name !== 'Десерт') &
+      (category?.name !== 'Выпечка') &
+      (category?.name !== 'Напитки'),
   )
 
   const tabs = [
@@ -185,7 +154,7 @@ const Menu = () => {
           ) : (
             <img src={custom_svg} alt="dessert" />
           )}
-          {filter_category[0].name}
+          {filter_category[0]?.name}
         </p>
       ),
       content: (
@@ -200,7 +169,7 @@ const Menu = () => {
       ),
     },
     {
-      label: (
+      label: FileReader[1] ? (
         <p
           className={styles.list__item}
           onClick={() => setCategoryName(filter_category[1].name)}
@@ -210,9 +179,9 @@ const Menu = () => {
           ) : (
             <img src={custom_svg} alt="dessert" />
           )}
-          {filter_category[1].name}
+          {filter_category[1]?.name}
         </p>
-      ),
+      ) : null,
       content: (
         <CustomContainer
           products={products}
@@ -225,7 +194,7 @@ const Menu = () => {
       ),
     },
     {
-      label: (
+      label: filter_category[2] ? (
         <p
           className={styles.list__item}
           onClick={() => setCategoryName(filter_category[2].name)}
@@ -235,9 +204,9 @@ const Menu = () => {
           ) : (
             <img src={custom_svg} alt="dessert" />
           )}
-          {filter_category[2].name}
+          {filter_category[2]?.name}
         </p>
-      ),
+      ) : null,
       content: (
         <CustomContainer
           products={products}
@@ -271,9 +240,9 @@ const Menu = () => {
     0,
   )
 
-
   useEffect(() => {
     dispatch(getBranchesMenu())
+    dispatch(getCategory())
   }, [])
 
   return (

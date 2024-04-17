@@ -13,7 +13,7 @@ export const getBranchesMenu = createAsyncThunk(
   async () => {
     try {
       const response = await api.get('/branches/branches/menu/')
-      return response
+      return response.data
     } catch (error) {
       toast.error(error.message)
     }
@@ -23,7 +23,7 @@ export const getBranchesMenu = createAsyncThunk(
 export const getCategory = createAsyncThunk('menu/getCategory', async () => {
   try {
     const response = await api.get('/menu/categories/')
-    return response
+    return response.data
   } catch (error) {
     toast.error(error.message)
   }

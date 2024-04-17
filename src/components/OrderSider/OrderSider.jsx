@@ -1,7 +1,7 @@
 import { CloseOutlined } from '@ant-design/icons'
 import addToCart from '@assets/images/add-to-cart.png'
-import styles from './order_sider.module.scss'
 import { useState } from 'react'
+import styles from './order_sider.module.scss'
 
 const OrderSider = ({
   handleOpenSider,
@@ -9,7 +9,7 @@ const OrderSider = ({
   products,
   setProducts,
   count,
-  setCount
+  setCount,
 }) => {
   const [items, setItems] = useState([
     {
@@ -27,31 +27,33 @@ const OrderSider = ({
   // Функция для добавления уникальных продуктов в items
   const addUniqueProductsToItems = () => {
     // Создаем объект для хранения количества каждого уникального продукта
-    const productCountMap = {};
+    const productCountMap = {}
 
     // Перебираем каждый элемент массива items
-    items.forEach(item => {
-      const productId = item.menu_id;
-      const quantity = item.quantity;
+    items.forEach((item) => {
+      const productId = item.menu_id
+      const quantity = item.quantity
       // Если продукт уже добавлен в объект, увеличиваем его счетчик
       if (productCountMap[productId]) {
-        productCountMap[productId] += quantity;
+        productCountMap[productId] += quantity
       } else {
         // Если продукта еще нет в объекте, добавляем его
-        productCountMap[productId] = quantity;
+        productCountMap[productId] = quantity
       }
-    });
+    })
 
     // Создаем новый массив items на основе уникальных продуктов и их количества
-    const uniqueItems = Object.entries(productCountMap).map(([productId, quantity]) => ({
-      menu_id: productId,
-      quantity: quantity,
-      extra_product: []
-    }));
+    const uniqueItems = Object.entries(productCountMap).map(
+      ([productId, quantity]) => ({
+        menu_id: productId,
+        quantity: quantity,
+        extra_product: [],
+      }),
+    )
 
     // Обновляем состояние items
-    setItems(uniqueItems);
-  };
+    setItems(uniqueItems)
+  }
 
   const addProductInStock = (id) => {
     setCount(count + 1)
@@ -97,6 +99,10 @@ const OrderSider = ({
     0,
   )
 
+  const handleClearStock = () => {
+    setProducts([])
+  }
+
   return (
     <div
       className={toggleSider ? styles.order_sider : styles.order__sider_close}
@@ -126,12 +132,19 @@ const OrderSider = ({
                 <div className={styles.card__list_count}>
                   <span onClick={() => addProductInStock(product.id)}>+</span>
                   <span>{productCountMap[product.id]}</span>
-                  <span onClick={() => deleteOneProductInStock(product.id)}>-</span>
+                  <span onClick={() => deleteOneProductInStock(product.id)}>
+                    -
+                  </span>
                 </div>
               </div>
             ))}
           </div>
-          <button className={styles.card__list_btn} onClick={addUniqueProductsToItems}>Добавить</button>
+          <button
+            className={styles.card__list_btn}
+            onClick={addUniqueProductsToItems}
+          >
+            Добавить
+          </button>
         </div>
       ) : (
         <>
@@ -145,7 +158,10 @@ const OrderSider = ({
           <span>{totalSum} сом</span>
         </div>
         {uniqueProducts.length ? (
-          <button className={styles.order__btn_has_product}>
+          <button
+            className={styles.order__btn_has_product}
+            onClick={handleClearStock}
+          >
             Закрыть счёт
           </button>
         ) : (

@@ -12,6 +12,13 @@ const initialState = {
 const config = {
   headers: {
     Authorization: getCookie('pre_token'),
+    'Content-Type': 'muitipart/formdata'
+  },
+}
+const configAuth = {
+  headers: {
+    Authorization: getCookie('pre_token'),
+    'Content-Type': 'muitipart/formdata'
   },
 }
 
@@ -26,13 +33,12 @@ export const checkEmail = createAsyncThunk(
   async ({ email, navigate }) => {
     try {
       const response = await api.post(`/users/login/barista/`, email)
-      console.log('response', response)
       toast.success(response.data.message)
       navigate('/code')
       setCookie('email', email.email)
       setCookie('pre_token', response.data.pre_token)
       setCookie('isAuth', false)
-      config.headers.Authorization = response.data.pre_token
+      configAuth.headers.Authorization = response.data.pre_token
       return response.data
     } catch (error) {
       toast.error(error.message)
@@ -43,17 +49,14 @@ export const checkEmail = createAsyncThunk(
 export const checkCode = createAsyncThunk(
   'auth/checkCode',
   async ({ formData, navigate, setIsCodeTrue }) => {
-    console.log(formData);
     try {
-      const response = await api.post(`/users/verify/email/`, formData, config)
+      const response = await api.post(`/users/verify/email/`, formData, configAuth)
       toast.success(response.data.detail)
-      console.log(response.data)
       navigate('/orders')
       setIsCodeTrue(false)
       setCookie('refresh', response.data.refresh)
       setCookie('access', response.data.access)
       setCookie('isAuth', true)
-      toast.success(response.data.message)
       return response.data
     } catch (error) {
       setIsCodeTrue(true)
@@ -80,7 +83,7 @@ export const getProfileUser = createAsyncThunk(
       const response = await api.get(`/barista/profile/`, accessToken)
       return response.data
     } catch (error) {
-      console.log(error)
+      toast.error(error.message)
     }
   },
 )
@@ -92,6 +95,9 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getProfileUser.fulfilled, (state, action) => {
       state.userProfile = action.payload
+    })
+    .addCase(checkCode.rejected, (state, action) => {
+      toast.error = action.payload
     })
   },
 })

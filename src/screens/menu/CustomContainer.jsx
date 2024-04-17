@@ -1,7 +1,7 @@
-import { branch_category, category } from '@api/menu_products_data'
+// import { branches_menu, category } from '@api/menu_products_data'
 import { openModal } from '@store/slices/modalSlice'
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styles from './menu.module.scss'
 
 const CustomContainer = ({
@@ -14,19 +14,19 @@ const CustomContainer = ({
 }) => {
   const [id, setId] = useState(null)
   const dispatch = useDispatch()
-  // const { category, branch_menu } = useSelector(state => state.menu)
+  const { category, branches_menu } = useSelector(state => state.menu)
 
   const get_category_product = category.find(
     (product) => product.name === categoryName,
   )
 
-  const get_products = branch_category.filter(
+  const get_products = branches_menu?.filter(
     (product) => product.category === get_category_product?.id,
   )
 
   const searchProductByName = search.toLowerCase()
 
-  const products_db = get_products.filter((product) =>
+  const products_db = get_products?.filter((product) =>
     product.name.toLowerCase().includes(searchProductByName),
   )
 

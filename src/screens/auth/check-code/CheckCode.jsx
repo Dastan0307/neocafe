@@ -13,7 +13,7 @@ const CheckCode = () => {
   const [isCodeTrue, setIsCodeTrue] = useState(false)
   const inputRefs = useRef([...Array(4)].map(() => React.createRef()))
 
-  const disptach = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleInputChange = (index, event) => {
@@ -51,7 +51,8 @@ const CheckCode = () => {
     formData.append('otp', code_active)
     formData.append('email', email)
 
-    disptach(checkCode({ formData, navigate, setIsCodeTrue }))
+    console.log(formData);
+    dispatch(checkCode({ formData, navigate, setIsCodeTrue }))
   }
 
   const handleCodeCheckEnter = (event) => {
@@ -63,12 +64,12 @@ const CheckCode = () => {
       formData.append('otp', code_active)
       formData.append('email', email)
 
-      disptach(checkCode({ formData, navigate, setIsCodeTrue }))
+      dispatch(checkCode({ formData, navigate, setIsCodeTrue }))
     }
   }
 
   const handleRetrieveСode = () => {
-    disptach(retrieveСode())
+    dispatch(retrieveСode())
   }
 
   useEffect(() => {
