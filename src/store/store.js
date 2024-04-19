@@ -4,6 +4,8 @@ import modalReducer from './slices/modalSlice'
 import menuReducer from './slices/menuSlice'
 import ordersReducer from './slices/ordersSlice'
 import statusReducer from './slices/statusSlice'
+import orderCartReducer from './slices/orderCartSlice'
+
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -11,5 +13,6 @@ export const store = configureStore({
     menu: menuReducer,
     orders: ordersReducer,
     status: statusReducer,
+    orderCart: orderCartReducer
   },
 })
