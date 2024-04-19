@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import OrderCardInCart from '../../components/OrderCardInCart'
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../../store/slices/modalSlice'
 import styles from './style.module.scss'
+import { openOrderCart, clearItems } from '../../store/slices/orderCartSlice'
 
 const Cart = ({order, handleOrderStatus, handleCancelOrder}) => {
-  console.log('cart', handleOrderStatus)
+  console.log('cart', order)
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(openOrderCart(order))
+  },[])
 
   const handleClose = () => {
     dispatch(closeModal())
+    dispatch(clearItems())
   }
   const handleAcceptOrder = (id, status) => {
     console.log('accept', id, status)

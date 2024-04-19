@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    activeStatus: 'Новые',
+    activeStatus: 'Новый',
 };
 
 const statusSlice = createSlice({

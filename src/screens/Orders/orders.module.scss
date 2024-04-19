@@ -171,6 +171,8 @@
     text-align: center;
     border: none;
     background-color: white;
+    cursor: pointer;
+
   }
   &-completed {
     color: rgb(42, 52, 64);
@@ -184,7 +186,7 @@
 
   }
   &-inprocess{
-    color: rgb(253, 248, 118);
+    color: rgb(244, 115, 86);
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
