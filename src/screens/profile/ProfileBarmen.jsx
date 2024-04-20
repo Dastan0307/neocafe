@@ -29,7 +29,7 @@ const ProfileBarmen = () => {
         </div>
         <div className={styles.inp}>
           <span>Дата рождения</span>
-          <input type="text" placeholder="" value={data?.birth_date} />
+          <input type="text" placeholder="" value={data?.birth_date.split('-').reverse().join('.')} />
         </div>
       </div>
     </div>

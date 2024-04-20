@@ -1,15 +1,17 @@
-import { Field, Form, Formik } from 'formik'
 import { loginImg, neocafeLogo } from '@assets'
 import { checkEmail } from '@store/slices/authSlice'
 import { validationSchema } from '@utils/Validate'
 import { Typography } from 'antd'
-import { useDispatch } from 'react-redux'
+import { Field, Form, Formik } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Loading from '@components/Loading/Loading'
 import styles from '../auth.module.scss'
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { isLoading } = useSelector((state) => state.auth)
 
   const handleSubmit = (email) => {
     dispatch(checkEmail({ email, navigate }))
@@ -21,6 +23,9 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      {
+        isLoading && <Loading />
+      }
       <img
         src={loginImg}
         alt="Error :("

@@ -7,6 +7,7 @@ const initialState = {
   name: '',
   code: '',
   userProfile: [],
+  isLoading: false,
 }
 
 const config = {
@@ -93,8 +94,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProfileUser.fulfilled, (state, action) => {
+    builder
+    .addCase(checkEmail.pending, (state, action) => {
+      state.isLoading = true
+    })
+    .addCase(checkEmail.fulfilled, (state, action) => {
+      state.isLoading = false
+    })
+    .addCase(getProfileUser.fulfilled, (state, action) => {
       state.userProfile = action.payload
+    })
+    .addCase(checkCode.pending, (state, action) => {
+      state.isLoading = true
+    })
+    .addCase(checkCode.fulfilled, (state, action) => {
+      state.isLoading = false
     })
     .addCase(checkCode.rejected, (state, action) => {
       toast.error = action.payload

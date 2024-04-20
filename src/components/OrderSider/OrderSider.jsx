@@ -10,6 +10,7 @@ const OrderSider = ({
   setProducts,
   count,
   setCount,
+  handleCloseSider,
 }) => {
   const [items, setItems] = useState([
     {
@@ -101,6 +102,7 @@ const OrderSider = ({
 
   const handleClearStock = () => {
     setProducts([])
+    handleCloseSider()
   }
 
   return (

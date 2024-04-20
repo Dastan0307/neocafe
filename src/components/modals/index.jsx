@@ -4,6 +4,7 @@ import AddOption from './menu-modals/AddOption'
 import ProductDescription from './menu-modals/ProductDescription'
 import CancelOrderModal from './CancelOrderModal'
 import Cart from '../../screens/Cart'
+import NotificationComponent from '../Notification/NotificationComponent'
 
 const Modals = () => {
   const { isOpen, modalType, modalProps } = useSelector((state) => state.modal)
@@ -13,7 +14,8 @@ const Modals = () => {
     addOption: AddOption,
     exit: ExitModal,
     cancelOrder: CancelOrderModal,
-    cart: Cart
+    cart: Cart,
+    notification: NotificationComponent,
   }
   const CurrentModal = modalType ? ModalsMap[modalType] : null
 

@@ -4,13 +4,15 @@ import { checkCode, retrieveСode } from '@store/slices/authSlice'
 import { getCookie } from '@utils/Cookie'
 import { Typography } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../../../components/Loading/Loading'
 import styles from '../auth.module.scss'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
   const [isCodeTrue, setIsCodeTrue] = useState(false)
+  const { isLoading } = useSelector((state) => state.auth)
   const inputRefs = useRef([...Array(4)].map(() => React.createRef()))
 
   const dispatch = useDispatch()
@@ -51,7 +53,7 @@ const CheckCode = () => {
     formData.append('otp', code_active)
     formData.append('email', email)
 
-    console.log(formData);
+    console.log(formData)
     dispatch(checkCode({ formData, navigate, setIsCodeTrue }))
   }
 
@@ -76,10 +78,11 @@ const CheckCode = () => {
     if (isCodeTrue) {
       setIsCodeTrue(false)
     }
-  }, [code, ])
+  }, [code])
 
   return (
     <div className={styles.container}>
+      {isLoading && <Loading />}
       <img
         src={loginImg}
         alt="Error :("

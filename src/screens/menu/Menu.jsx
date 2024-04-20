@@ -21,6 +21,7 @@ import { getCategory } from '../../store/slices/menuSlice'
 import CustomContainer from './CustomContainer'
 import MenuTabs from './MenuTabs'
 import styles from './menu.module.scss'
+import { openModal } from '../../store/slices/modalSlice'
 
 const Menu = () => {
   const dispatch = useDispatch()
@@ -33,6 +34,7 @@ const Menu = () => {
   const [categoryName, setCategoryName] = useState('')
   const [products, setProducts] = useState([])
   const [count, setCount] = useState(1)
+  const [id, setId] = useState(null)
   const [items, setItems] = useState([
     {
       menu_id: 0,
@@ -54,6 +56,10 @@ const Menu = () => {
       (category?.name !== 'Напитки'),
   )
 
+  const handleCloseSider = () => {
+    setId(null)
+  }
+
   const tabs = [
     {
       label: (
@@ -68,6 +74,8 @@ const Menu = () => {
       ),
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName="Кофе"
@@ -90,6 +98,8 @@ const Menu = () => {
       ),
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName="Выпечка"
@@ -112,6 +122,8 @@ const Menu = () => {
       ),
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName="Десерт"
@@ -134,6 +146,8 @@ const Menu = () => {
       ),
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName="Напитки"
@@ -159,6 +173,8 @@ const Menu = () => {
       ),
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName={categoryName}
@@ -184,6 +200,8 @@ const Menu = () => {
       ) : null,
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName={categoryName}
@@ -209,6 +227,8 @@ const Menu = () => {
       ) : null,
       content: (
         <CustomContainer
+        id={id}
+        setId={setId}
           products={products}
           setProducts={setProducts}
           categoryName={categoryName}
@@ -245,6 +265,15 @@ const Menu = () => {
     dispatch(getCategory())
   }, [])
 
+  const handleOpenNotificationComponent = () => {
+    dispatch(
+      openModal({
+        modalType: "notification",
+        modalProps: {},
+      })
+    );
+  };
+
   return (
     <div className={styles.menu}>
       <header className={styles.menu__header}>
@@ -257,7 +286,7 @@ const Menu = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <img src={bell} alt="Error :(" width={48} />
+        <img src={bell} alt="Error :(" width={48} onClick={handleOpenNotificationComponent} />
       </header>
       <MenuTabs tabs={tabs} setIsActive={setIsActive} />
       <button className={styles.menu__takeout_btn} onClick={handleOpenModal}>
@@ -273,6 +302,7 @@ const Menu = () => {
           count={count}
           setCount={setCount}
           products={products}
+          handleCloseSider={handleCloseSider}
         />
       )}
     </div>
