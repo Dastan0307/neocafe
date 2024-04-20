@@ -92,7 +92,7 @@ export default function PaginatedOrderCardsCafe({
                   onClick={() => handleOrderStatus(order.id, order.status, "В заведении")}
                 >
                   {order.status === 'Готово'
-                    ? 'Заказ готов'
+                    ? 'Завершить заказ'
                     : order.status === 'В процессе'
                       ? 'Заказ готов'
                       : order.status === 'Новый'

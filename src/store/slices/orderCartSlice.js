@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   totalPrice: 0,
-  items:[],
+  items: [],
 }
 
 export const orderCart = createSlice({
@@ -30,8 +30,19 @@ export const orderCart = createSlice({
     minusItem(state, action){
         const findItem = state.items.find((obj) => obj.id === action.payload)
         if(findItem){
-            findItem.count--
+            findItem.quantity--
+            state.totalPrice = state.totalPrice - findItem.quantity * +findItem.menu_detail.price
         }
+    },
+    plusItem(state, action){
+        const findItem = state.items.find((obj) => obj.id === action.payload)
+        if(findItem){
+            findItem.quantity++
+            state.totalPrice = state.totalPrice + findItem.quantity * +findItem.menu_detail.price
+        }
+    },
+    deleteItem(state, action){
+        const findItem = state.items.find((obj) => obj.id === action.payload)
     },
     openOrderCart(state, action){
         state.totalPrice = +action.payload.total_price;
@@ -40,6 +51,6 @@ export const orderCart = createSlice({
   },
 })
 
-export const { addItem, clearItems, minusItem, openOrderCart } = orderCart.actions
+export const { addItem, clearItems, minusItem, plusItem, openOrderCart } = orderCart.actions
 
 export default orderCart.reducer

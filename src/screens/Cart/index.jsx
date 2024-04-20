@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
 import OrderCardInCart from '../../components/OrderCardInCart'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { closeModal } from '../../store/slices/modalSlice'
 import styles from './style.module.scss'
-import { openOrderCart, clearItems } from '../../store/slices/orderCartSlice'
+import { openOrderCart, clearItems, minusItem, plusItem } from '../../store/slices/orderCartSlice'
 
 const Cart = ({order, handleOrderStatus, handleCancelOrder}) => {
   console.log('cart', order)
+  
   const dispatch = useDispatch();
-
+  const totalPrice = useSelector(state => state.orderCart.totalPrice)
+  const items = useSelector(state => state.orderCart.items)
+  
   useEffect(()=>{
     dispatch(openOrderCart(order))
   },[])
@@ -18,16 +21,20 @@ const Cart = ({order, handleOrderStatus, handleCancelOrder}) => {
     dispatch(clearItems())
   }
   const handleAcceptOrder = (id, status) => {
-    console.log('accept', id, status)
     handleOrderStatus(id, status)
   }
 
   const handleOrderCancel = (id) => {
-    console.log('cancel', id)
-
     handleCancelOrder(id)
   }
-
+  const handleMinusCount = (id, quantity) =>{
+    if(quantity > 1){
+      dispatch(minusItem(id))
+    }
+  }
+  const handlePlusCount = (id) =>{
+    dispatch(plusItem(id))
+  }
   return (
     <div className={styles.root}>
       <div className={styles.title__wrapper}>
@@ -36,8 +43,8 @@ const Cart = ({order, handleOrderStatus, handleCancelOrder}) => {
       </div>
       <div className={styles.positionWrapper}>
         {
-          order.items.map(item => (
-            <OrderCardInCart item={item}/>
+          items.map(item => (
+            <OrderCardInCart item={item} handleMinusCount={handleMinusCount} handlePlusCount={handlePlusCount}/>
           ))
         }
       </div>
@@ -45,7 +52,7 @@ const Cart = ({order, handleOrderStatus, handleCancelOrder}) => {
       <div>
         <div className={styles.total__wrapper}>
           <h3 className={styles.total__text}>Итого</h3>
-          <h3 className={styles.total__number}>{parseFloat(+order.total_price).toFixed(2)} сом</h3>
+          <h3 className={styles.total__number}>{totalPrice} сом</h3>
         </div>
         <div className={styles.btn__wrapper}>
           <button
