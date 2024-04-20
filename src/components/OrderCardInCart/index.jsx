@@ -2,7 +2,7 @@ import React from 'react'
 import { coffee } from '../../assets/index'
 import styles from './style.module.scss'
 
-const OrderCardInCart = ({item}) => {
+const OrderCardInCart = ({item, handleMinusCount, handlePlusCount}) => {
   return (
     <div className={styles.root}>
       <div className={styles.flex}>
@@ -19,7 +19,7 @@ const OrderCardInCart = ({item}) => {
       <div className={styles.priceWrapper}>
         <h3 className={styles.price}>{item.menu_detail.price} с</h3>
         <div className={styles.btns}>
-          <button>+</button>{item.quantity}<button>-</button>
+          <button onClick={()=>handlePlusCount(item.id)}>+</button>{item.quantity}<button onClick={()=>handleMinusCount(item.id, item.quantity)}>-</button>
         </div>
       </div>
     </div>
