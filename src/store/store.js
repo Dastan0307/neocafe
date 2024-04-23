@@ -6,6 +6,7 @@ import ordersReducer from './slices/ordersSlice'
 import statusReducer from './slices/statusSlice'
 import userReducer from './slices/userSlice'
 import notificationReducer from './slices/notificationSlice'
+import orderCartReducer from './slices/orderCartSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     orders: ordersReducer,
     status: statusReducer,
     user: userReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
+    orderCart: orderCartReducer
   },
 })

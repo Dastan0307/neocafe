@@ -13,7 +13,7 @@ const NotificationComponent = () => {
   const notification = useSelector((state) => state.notification.notifications)
   const dispatch = useDispatch()
 
-  const data = Array.from(notification)
+  const data = Array.from(notification || [])
   const notifications = data.reverse()
 
   const closeModalNotification = () => {

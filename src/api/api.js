@@ -45,7 +45,10 @@ export const changeOrderInfo = async (id, data) => {
   const res = await api.patch(`/orders/update-customer-order/${id}/`, data);
   return res;
 };
-
+export const changeCafeOrderStatus = async (id, data) => {
+  const res = await api.patch(`/orders/update-order/${id}/`, data);
+  return res;
+};
 export const getOrderInfo = async (id) => {
   const res = await api.get(`/orders/${id}`);
   return res;

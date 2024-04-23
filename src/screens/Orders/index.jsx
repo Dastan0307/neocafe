@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { bell } from '../../assets/'
-import { getOrders, changeOrderInfo } from '../../api/api'
+import { getOrders, changeOrderInfo, changeCafeOrderStatus } from '../../api/api'
 import { getProfileUser } from '@store/slices/authSlice'
 import { setOrders } from '../../store/slices/ordersSlice'
 import { setActiveStatus } from '../../store/slices/statusSlice'
@@ -76,9 +76,11 @@ const Orders = () => {
     dispatch(getProfileUser())
   }, [])
 
-  const handleOrderStatus = async (id, status) => {
+  const handleOrderStatus = async (id, status, place) => {
+    console.log(id, status, place)
     let updatedOrder
     let orderIndex = allOrdersData.findIndex((order) => order.id === id)
+    console.log(orderIndex)
     if (status === 'Новый') {
       updatedOrder = { status: 'В процессе' }
     } else if (status === 'В процессе') {
@@ -91,14 +93,19 @@ const Orders = () => {
       }
     }
     try {
-      changeOrderInfoRequest(id, updatedOrder)
+      if(place === "На вынос"){
+        changeTakeAwayOrderInfoRequest(id, updatedOrder)
+      }else{
+        changeCafeOrderInfoRequest(id, updatedOrder)
+      }
     } catch (err) {
       console.log(err)
     }
   }
 
-  const changeOrderInfoRequest = async (id, data) => {
+  const changeTakeAwayOrderInfoRequest = async (id, data) => {
     try {
+      console.log('id', id, 'data', data)
       const res = await changeOrderInfo(id, data)
       console.log(res)
       const resp = await getOrders()
@@ -107,7 +114,18 @@ const Orders = () => {
       console.log(err)
     }
   }
-
+  const changeCafeOrderInfoRequest = async (id, data) => {
+    try {
+      console.log('id', id, 'data', data)
+      const res = await changeCafeOrderStatus(id, data)
+      console.log(res)
+      const resp = await getOrders()
+      dispatch(setOrders(resp.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
   const handleOrderCart = (order) => {
     if (order.status === 'Новый') {
       dispatch(
@@ -130,6 +148,15 @@ const Orders = () => {
     )
   }
 
+  const handleOpenNotificationComponent = () => {
+    dispatch(
+      openModal({
+        modalType: "notification",
+        modalProps: {},
+      })
+    );
+  };
+
   return (
     <div>
       <header className={styles.header}>
@@ -149,7 +176,7 @@ const Orders = () => {
           </button>
         </div>
         <div>
-          <img src={bell} alt="bell" />
+          <img src={bell} alt="bell" onClick={handleOpenNotificationComponent} width={48} height={48} />
         </div>
       </header>
       <div className={styles.container}>

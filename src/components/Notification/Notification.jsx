@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 const NotificationComponent = () => {
 	const { id } = useSelector(state => state.user.userId)
 	useEffect(() => {
-		const ws = new WebSocket(`wss://helsinki-backender.org.kg/ws/admin/${id}/`)
+		const ws = new WebSocket(`wss://helsinki-backender.org.kg/ws/barmen/60/`)
 
 		ws.onopen = () => {
 			console.log('Connected to server')
