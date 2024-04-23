@@ -1,15 +1,17 @@
-import { Formik, Form, Field } from 'formik'
-import * as Yup from 'yup'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { Typography } from 'antd'
+import { loginImg, neocafeLogo } from '@assets'
+import Loading from '@components/Loading/Loading'
 import { checkEmail } from '@store/slices/authSlice'
-import { neocafeLogo, loginImg } from '@assets'
+import { Typography } from 'antd'
+import { Field, Form, Formik } from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
 import styles from '../auth.module.scss'
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { isLoading } = useSelector((state) => state.auth)
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -27,6 +29,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      {isLoading && <Loading />}
       <img
         src={loginImg}
         alt="Error :("

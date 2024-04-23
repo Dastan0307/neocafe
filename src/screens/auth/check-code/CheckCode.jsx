@@ -1,18 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Typography } from 'antd'
+<<<<<<< HEAD
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { LoginButton } from '@components/Buttons/LoginButton'
 import { neocafeLogo, loginImg } from '@assets'
+=======
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import Loading from '../../../components/Loading/Loading'
+>>>>>>> f0f51b7884d21807c405a1a45341b44827ba3d22
 import styles from '../auth.module.scss'
 import { checkCode } from '@store/slices/authSlice'
 
 const CheckCode = () => {
   const [code, setCode] = useState(['', '', '', ''])
   const [isCodeTrue, setIsCodeTrue] = useState(false)
+  const { isLoading } = useSelector((state) => state.auth)
   const inputRefs = useRef([...Array(4)].map(() => React.createRef()))
 
-  const disptach = useDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleInputChange = (index, event) => {
@@ -45,16 +53,44 @@ const CheckCode = () => {
 
   const handleCodeCheck = () => {
     const code_active = code.join('')
+<<<<<<< HEAD
     disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
+=======
+    const email = getCookie('email')
+
+    const formData = new FormData()
+    formData.append('otp', code_active)
+    formData.append('email', email)
+
+    console.log(formData)
+    dispatch(checkCode({ formData, navigate, setIsCodeTrue }))
+>>>>>>> f0f51b7884d21807c405a1a45341b44827ba3d22
   }
 
   const handleCodeCheckEnter = (event) => {
     if (event.key === 'Enter') {
       const code_active = code.join('')
+<<<<<<< HEAD
       disptach(checkCode({ code_active, navigate, setIsCodeTrue }))
     }
   }
 
+=======
+      const email = getCookie('email')
+
+      const formData = new FormData()
+      formData.append('otp', code_active)
+      formData.append('email', email)
+
+      dispatch(checkCode({ formData, navigate, setIsCodeTrue }))
+    }
+  }
+
+  const handleRetrieveСode = () => {
+    dispatch(retrieveСode())
+  }
+
+>>>>>>> f0f51b7884d21807c405a1a45341b44827ba3d22
   useEffect(() => {
     if (isCodeTrue) {
       setIsCodeTrue(false)
@@ -63,6 +99,7 @@ const CheckCode = () => {
 
   return (
     <div className={styles.container}>
+      {isLoading && <Loading />}
       <img
         src={loginImg}
         alt="Error :("
